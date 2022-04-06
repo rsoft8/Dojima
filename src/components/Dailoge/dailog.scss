@@ -1,0 +1,27 @@
+.dailog-item {
+  background-color: rgb(232, 232, 233);
+  border-radius: 5px;
+  padding: 8px;
+  display: flex;
+  .item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    .p {
+      font-size: 12px;
+    }
+    .h6 {
+      margin-top: 0px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+}
+.dailog-content {
+  .name {
+    color: gray;
+  }
+  .value {
+    font-size: 14px;
+  }
+}
