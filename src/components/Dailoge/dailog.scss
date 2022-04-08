@@ -8,20 +8,41 @@
     display: flex;
     align-items: center;
     .p {
-      font-size: 12px;
+      font-size: 11px;
+      color: #aeaeae;
     }
-    .h6 {
+    .icon-text {
       margin-top: 0px;
-      font-size: 18px;
-      font-weight: bold;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .amount-value {
+      margin-top: -5px;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: "Source Sans Pro", sans-serif;
     }
   }
 }
+
+.close{
+  position: absolute !important;
+  padding: 0;
+  margin: 5px;
+}
+
 .dailog-content {
   .name {
-    color: gray;
+    color: #989898;
+    font-family: "HelveticaNeue-Regular", "Helvetica Neue Regular",
+      "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
   }
   .value {
+    font-family: "HelveticaNeue-Regular", "Helvetica Neue Regular",
+      "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-size: 14px;
+    font-size: 14px;
+    color: #29343e;
   }
 }

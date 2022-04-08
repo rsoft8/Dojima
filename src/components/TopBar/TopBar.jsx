@@ -12,7 +12,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import MenuIcon from "@material-ui/icons/Menu";
 import ConnectMenu from "./ConnectMenu.jsx";
 import "./topbar.scss";
-
+import green from "@material-ui/core/colors/green";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     [theme.breakpoints.up("sm")]: {
@@ -21,10 +21,9 @@ const useStyles = makeStyles((theme) => ({
     },
     justifyContent: "center",
     alignItems: "center",
-    background: theme.palette.background.paper,
-    backdropFilter: "none",
     height: "86px",
   },
+
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("981")]: {
@@ -37,19 +36,23 @@ function TopBar({ theme, toggleTheme, handleDrawerToggle }) {
   const classes = useStyles();
   const isVerySmallScreen = useMediaQuery("(max-width: 355px)");
   return (
-    <AppBar position="fixed" className={classes.appBar} elevation={0}>
+    <AppBar
+      position="fixed"
+      className={classes.appBar}
+      style={{ background: "#2E3B55" }}
+      elevation={0}
+    >
       <Toolbar disableGutters className="dapp-topbar">
-        <Button
+        {/* <Button
           id="hamburger"
           aria-label="open drawer"
           size="large"
           variant="text"
-          color="secondary"
           onClick={handleDrawerToggle}
           className={classes.menuButton}
         >
           <MenuIcon />
-        </Button>
+        </Button> */}
 
         <Box sx={{ flexGrow: 1 }} />
         <Box display="flex">

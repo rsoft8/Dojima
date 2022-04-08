@@ -14,7 +14,8 @@ import { Trans } from "@lingui/react";
 import { Skeleton, Stack } from "@mui/material";
 import "./dailog.scss";
 import WalletIcon from "./walletIcon.png";
-function TransitionDailog({ isOpen, handleClose, type }) {
+function TransitionDailog({ isOpen, handleClose, type, handlePurchase }) {
+  const primaryColor = "#2042B3";
   const [numPlayers, setNumPlayers] = React.useState(0);
   return (
     <Dialog
@@ -23,31 +24,42 @@ function TransitionDailog({ isOpen, handleClose, type }) {
       onClose={handleClose}
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle>
+      <DialogTitle sx={{ display: "flex" }}>
         <IconButton
           aria-label="close"
           onClick={handleClose}
+          className="close"
           sx={{
             color: (theme) => theme.palette.grey[500],
           }}
         >
           <CloseIcon />
         </IconButton>
-        {type}
+        <Box
+          sx={{
+            flex: 1,
+            display: "flex",
+            justifyContent: "center",
+            marginTop: 2,
+            marginRight: 10,
+          }}
+        >
+          <Typography variant="h6">{type}</Typography>
+        </Box>
       </DialogTitle>
       <DialogContent className="dailog-content">
         <Box className="dailog-item">
           <Stack className="item" direction="row">
             <img src={WalletIcon} alt="" />
-            <Typography className="h6">rDAP</Typography>
+            <Typography className="icon-text">rDAP</Typography>
           </Stack>
           <Stack className="item">
             <Typography className="p">Total Available</Typography>
-            <Typography className="h6">274.52 KPR</Typography>
+            <Typography className="amount-value">274.52 KPR</Typography>
           </Stack>
           <Stack className="item">
             <Typography className="p">Total Available</Typography>
-            <Typography className="h6">274.52 KPR</Typography>
+            <Typography className="amount-value">274.52 KPR</Typography>
           </Stack>
         </Box>
         <div className="data-row">
@@ -67,7 +79,8 @@ function TransitionDailog({ isOpen, handleClose, type }) {
           onChange={(e) => setNumPlayers(e.target.value)}
           sx={{
             width: "95%",
-            color: "rgb(41, 46, 186)",
+            marginLeft: 0.6,
+            color: primaryColor,
             "& .MuiSlider-rail": {
               height: "10px",
             },
@@ -76,57 +89,101 @@ function TransitionDailog({ isOpen, handleClose, type }) {
             },
           }}
         />
-        <div className="data-row">
-          <Typography className="name">Underlying Amount</Typography>
-          <Typography className="value">
-            {false ? <Skeleton width="80px" /> : <>{"343 KPR"}</>}
-          </Typography>
-        </div>
-        <div className="data-row">
-          <Typography className="name">Amount due on execution</Typography>
-          <Typography className="value">
-            {false ? <Skeleton width="80px" /> : <>{"20 USDC"}</>}
-          </Typography>
-        </div>
-        <div className="data-row">
-          <Typography className="name">Strike Price</Typography>
-          <Typography className="value">
-            {false ? <Skeleton width="80px" /> : <>{"$11"}</>}
-          </Typography>
-        </div>
-        <div className="data-row">
-          <Typography className="name">Market Price</Typography>
-          <Typography className="value">
-            {false ? <Skeleton width="80px" /> : <>{"$3439"}</>}
-          </Typography>
-        </div>
-        <div className="data-row">
-          <Typography className="name">ROI</Typography>
-          <Typography className="value">
-            {false ? <Skeleton width="80px" /> : <>{"3%"}</>}
-          </Typography>
-        </div>
-        <div className="data-row">
-          <Typography className="name">Time to expiry</Typography>
-          <Typography className="value">
-            {false ? <Skeleton width="80px" /> : <>{"3 days"}</>}
-          </Typography>
-        </div>
+        {type == "Purchase" ? (
+          <>
+            {" "}
+            <div className="data-row">
+              <Typography className="name">Underlying Amount</Typography>
+              <Typography className="value">
+                {false ? <Skeleton width="80px" /> : <>{"343 KPR"}</>}
+              </Typography>
+            </div>
+            <div className="data-row">
+              <Typography className="name">Amount due on execution</Typography>
+              <Typography className="value">
+                {false ? <Skeleton width="80px" /> : <>{"20 USDC"}</>}
+              </Typography>
+            </div>
+            <div className="data-row">
+              <Typography className="name">Strike Price</Typography>
+              <Typography className="value">
+                {false ? <Skeleton width="80px" /> : <>{"$11"}</>}
+              </Typography>
+            </div>
+            <div className="data-row">
+              <Typography className="name">Market Price</Typography>
+              <Typography className="value">
+                {false ? <Skeleton width="80px" /> : <>{"$3439"}</>}
+              </Typography>
+            </div>
+            <div className="data-row">
+              <Typography className="name">ROI</Typography>
+              <Typography className="value">
+                {false ? <Skeleton width="80px" /> : <>{"3%"}</>}
+              </Typography>
+            </div>
+            <div className="data-row">
+              <Typography className="name">Time to expiry</Typography>
+              <Typography className="value">
+                {false ? <Skeleton width="80px" /> : <>{"3 days"}</>}
+              </Typography>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="data-row">
+              <Typography className="name">You Will Get</Typography>
+              <Typography className="value">
+                {false ? <Skeleton width="80px" /> : <>{"343 KPR"}</>}
+              </Typography>
+            </div>
+            <div className="data-row">
+              <Typography className="name">You Will Give</Typography>
+              <Typography className="value">
+                {false ? <Skeleton width="80px" /> : <>{"20 USDC"}</>}
+              </Typography>
+            </div>
+            <div className="data-row">
+              <Typography className="name">ROI</Typography>
+              <Typography className="value">
+                {false ? <Skeleton width="80px" /> : <>{"3%"}</>}
+              </Typography>
+            </div>
+            <div className="data-row">
+              <Typography className="name">Time to expire</Typography>
+              <Typography className="value">
+                {false ? <Skeleton width="80px" /> : <>{"3 Days"}</>}
+              </Typography>
+            </div>
+          </>
+        )}
       </DialogContent>
       <DialogActions sx={{ padding: 3, paddingBottom: 3 }}>
         <Button
           variant="contained"
-          color="primary"
-          sx={{ display: "flex", flex: 1, minWidth: 180 }}
+          style={{
+            background: primaryColor,
+            color: "#fff",
+            textTransform: "none",
+            borderRadius: 8,
+            minWidth: 150,
+          }}
           onClick={handleClose}
         >
           Approve
         </Button>
         <Button
-          variant="outlined"
-          color="primary"
-          sx={{ display: "flex", flex: 1, minWidth: 200 }}
-          onClick={handleClose}
+          variant="contained"
+          style={{
+            background: "#E5E5E5",
+            color: "#707070",
+            borderColor: "#707070",
+            textTransform: "none",
+            borderRadius: 8,
+            boxShadow: "none",
+            minWidth: 170,
+          }}
+          onClick={handlePurchase}
         >
           {type} Options
         </Button>
