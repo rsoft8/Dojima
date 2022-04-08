@@ -13,6 +13,7 @@ import { light as lightTheme } from "./themes/light.js";
 import "./App.scss";
 import NavDrawer from "./components/Sidebar/NavDrawer";
 import Sidebar from "./components/Sidebar/Sidebar";
+
 const drawerWidth = 280;
 const transitionDuration = 969;
 
@@ -61,7 +62,6 @@ function App() {
   const classes = useStyles();
   const [theme, toggleTheme, mounted] = useTheme();
   let themeMode = lightTheme;
-
   useEffect(() => {
     themeMode = lightTheme;
   }, [theme]);

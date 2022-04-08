@@ -67,7 +67,7 @@ function ConnectMenu() {
   const open = Boolean(anchorEl);
   const id = open ? "ohm-popper-pending" : undefined;
 
-  const primaryColor = "rgb(41, 46, 186)";
+  const primaryColor = "#292EBA";
 
   const getEtherscanUrl = (txnHash) => {
     return chainID === 4
@@ -103,7 +103,15 @@ function ConnectMenu() {
       <Button
         className="connect-btn"
         variant="outlined"
-        style={pendingTransactions.length > 0 ? { color: primaryColor } : {}}
+        style={
+          pendingTransactions.length > 0
+            ? {
+                color: primaryColor,
+                borderColor: primaryColor,
+                textTransform: "none",
+              }
+            : { borderColor: primaryColor, textTransform: "none" }
+        }
         onClick={clickFunc}
         onMouseOver={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
@@ -152,21 +160,6 @@ function ConnectMenu() {
                     </Link>
                   </Box>
                 ))}
-                {/* <Box className="add-tokens">
-                  <Divider color="secondary" />
-                  <Button
-                    size="large"
-                    variant="contained"
-                    color="primary"
-                    onClick={disconnect}
-                    style={{ marginBottom: "0px" }}
-                    fullWidth
-                  >
-                    <Typography component="p">
-                      <Trans>Disconnect</Trans>
-                    </Typography>
-                  </Button>
-                </Box> */}
               </Paper>
             </Fade>
           );

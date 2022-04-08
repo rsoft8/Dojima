@@ -22,15 +22,15 @@ import TransitionDailog from "src/components/Dailoge/TransitionDailog";
 import { CardHeader } from "@mui/material";
 function Home() {
   const array = [1, 1, 1, 1, 1, 1];
+  const primaryColor = "#2042B3";
   const [purchaseDialoge, setPurchaseDialoge] = useState(false);
   const [exerciseDialoge, setExerciseDialoge] = useState(false);
   const tableHeader = {
-    fontSize: 13,
-    fontWeight: "bold",
+    fontSize: 16,
     paddingY: 2,
-    paddingX: 1,
+    paddingX: 3,
   };
-  const tableValue = { fontSize: 14, padding: 2 };
+  const tableValue = { fontSize: 16, padding: 0 };
   return (
     <div id="home-view">
       <Box className="container">
@@ -108,11 +108,22 @@ function Home() {
                   <TableCell sx={tableValue} align="center">
                     30 Days
                   </TableCell>
-                  <TableCell component="th" scope="row" align="center">
+                  <TableCell
+                    className="row-btn"
+                    component="th"
+                    scope="row"
+                    align="center"
+                  >
                     <Button
                       variant="contained"
-                      className="row-btn"
-                      color="primary"
+                      style={{
+                        background: primaryColor,
+                        color: "#fff",
+                        textTransform: "none",
+                        borderRadius: 8,
+                        paddingTop: 3,
+                        paddingBottom: 3,
+                      }}
                       onClick={() => {
                         setPurchaseDialoge(!purchaseDialoge);
                       }}
@@ -120,10 +131,17 @@ function Home() {
                       <p className="row-btn-text">Purchanse Options</p>
                     </Button>
                   </TableCell>
-                  <TableCell align="center">
+                  <TableCell className="row-btn" align="center">
                     <Button
                       variant="outlined"
-                      color="primary"
+                      style={{
+                        borderColor: "#AFAFAF",
+                        color: "#AFAFAF",
+                        textTransform: "none",
+                        borderRadius: 8,
+                        paddingTop: 3,
+                        paddingBottom: 3,
+                      }}
                       onClick={() => {
                         setExerciseDialoge(!exerciseDialoge);
                       }}
@@ -135,33 +153,72 @@ function Home() {
               ))}
             </TableBody>
           </Table>
-          {/* {array.map((row) => ( */}
-          {/* <Card sx={{ margin: 1 }}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                padding: 8,
-                borderBottom: 3,
-                borderColor: "#000",
-              }}
-            >
-              <Typography variant="h6">FOT - ETH2</Typography>
-              <Typography variant="h6">FOT</Typography>
-            </Box>
-            <CardContent>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Typography variant="p">Strike Price - 5$ </Typography>
-                <Typography variant="p">Market Price - 5$ </Typography>
-                <Typography variant="p" sx={{ marginTop: 10 }}>
-                  Amount Available
-                </Typography>
-                <Typography variant="p">1000 / 10,000</Typography>
+        </Box>
+        <Box className="mobile-card">
+          {array.map((row) => (
+            <Card className="main-card" elevation={10}>
+              <Box className="card-header">
+                <Typography variant="h6">FOT - ETH2</Typography>
+                <Typography variant="h6">FOT</Typography>
               </Box>
-            </CardContent>
-          </Card> */}
-          {/* ))} */}
+              <CardContent>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Typography variant="p">Strike Price - 5$ </Typography>
+                  <Typography variant="p">Market Price - 5$ </Typography>
+                </Box>
+                <Box className="card-block">
+                  <Typography variant="p" className="bold-text">
+                    <b>Amount Available</b>
+                  </Typography>
+                  <Typography variant="p">1000 / 10,000</Typography>
+                </Box>
+                <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+                  <Box className="card-block">
+                    <Typography variant="p" className="bold-text">
+                      <b>Option Price</b>
+                    </Typography>
+                    <Typography variant="p">100</Typography>
+                  </Box>
+                  <Box className="card-block">
+                    <Typography variant="p" className="bold-text">
+                      <b>Time to expiry</b>
+                    </Typography>
+                    <Typography variant="p">30 Days</Typography>
+                  </Box>
+                </Box>
+              </CardContent>
+              <Box className="card-action">
+                <Button
+                  variant="contained"
+                  style={{
+                    background: primaryColor,
+                    color: "#fff",
+                    textTransform: "none",
+                    borderRadius: 8,
+                  }}
+                  onClick={() => {
+                    setPurchaseDialoge(!purchaseDialoge);
+                  }}
+                >
+                  <p className="row-btn-text">Purchanse Options</p>
+                </Button>
+                <Button
+                  variant="outlined"
+                  style={{
+                    borderColor: "#AFAFAF",
+                    color: "#AFAFAF",
+                    textTransform: "none",
+                    borderRadius: 8,
+                  }}
+                  onClick={() => {
+                    setExerciseDialoge(!exerciseDialoge);
+                  }}
+                >
+                  <p className="row-btn-text"> Exercise Option</p>
+                </Button>
+              </Box>
+            </Card>
+          ))}
         </Box>
       </Box>
       <TransitionDailog
@@ -170,11 +227,18 @@ function Home() {
         handleClose={() => {
           setPurchaseDialoge(!purchaseDialoge);
         }}
+        handlePurchase={() => {
+          setPurchaseDialoge(!purchaseDialoge);
+          setExerciseDialoge(!exerciseDialoge);
+        }}
       />
       <TransitionDailog
         isOpen={exerciseDialoge}
         type="Exercise"
         handleClose={() => {
+          setExerciseDialoge(!exerciseDialoge);
+        }}
+        handlePurchase={() => {
           setExerciseDialoge(!exerciseDialoge);
         }}
       />
