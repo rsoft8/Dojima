@@ -1,12 +1,15 @@
 .dailog-item {
   background-color: rgb(232, 232, 233);
   border-radius: 5px;
-  padding: 8px;
+  padding: 17px 8px;
   display: flex;
+
   .item {
     flex: 1;
     display: flex;
+    width: auto;
     align-items: center;
+
     .p {
       font-size: 11px;
       color: #aeaeae;
@@ -20,29 +23,56 @@
       margin-top: -5px;
       font-size: 16px;
       font-weight: 500;
+      display: flex;
+      text-align: center;
       font-family: "Source Sans Pro", sans-serif;
     }
   }
+  .min-w {
+    min-width: 150px;
+  }
 }
 
-.close{
-  position: absolute !important;
-  padding: 0;
-  margin: 5px;
+.logo-img {
+  height: 35px;
+  width: 35px;
+  margin-right: 6px;
 }
-
 .dailog-content {
   .name {
     color: #989898;
-    font-family: "HelveticaNeue-Regular", "Helvetica Neue Regular",
-      "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-family: "HelveticaNeue-Regular", "Helvetica Neue Regular", "Helvetica Neue", Helvetica, Arial, "Lucida Grande",
+      sans-serif;
     font-size: 14px;
   }
   .value {
-    font-family: "HelveticaNeue-Regular", "Helvetica Neue Regular",
-      "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-family: "HelveticaNeue-Regular", "Helvetica Neue Regular", "Helvetica Neue", Helvetica, Arial, "Lucida Grande",
+      sans-serif;
     font-size: 14px;
     font-size: 14px;
     color: #29343e;
+  }
+  .slider-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .number-input {
+    font-size: 5px;
+    max-width: 50px;
+  }
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 10px;
+    .name {
+      color: #989898;
+      font-family: "HelveticaNeue-Regular", "Helvetica Neue Regular", "Helvetica Neue", Helvetica, Arial,
+        "Lucida Grande", sans-serif;
+      font-size: 14px;
+      margin-right: 24px;
+    }
   }
 }

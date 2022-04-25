@@ -21,7 +21,7 @@ function Linear({ message }) {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setProgress((oldProgress) => {
+      setProgress(oldProgress => {
         if (oldProgress === 0) {
           clearInterval(timer);
           dispatch(close(message));
@@ -46,7 +46,7 @@ function Linear({ message }) {
 
 // A component that displays error messages
 function Messages() {
-  const messages = useSelector((state) => state.messages);
+  const messages = useSelector(state => state.messages);
   const dispatch = useDispatch();
   // Returns a function that can closes a message
   const handleClose = function (message) {
@@ -57,13 +57,9 @@ function Messages() {
   return (
     <div>
       <div>
-        {/* {messages.items.map((message, index) => {
+        {messages.items.map((message, index) => {
           return (
-            <Snackbar
-              open={message.open}
-              key={index}
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            >
+            <Snackbar open={message.open} key={index} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
               <Alert
                 variant="filled"
                 icon={false}
@@ -78,7 +74,7 @@ function Messages() {
               </Alert>
             </Snackbar>
           );
-        })} */}
+        })}
       </div>
     </div>
   );

@@ -2,11 +2,11 @@
   min-width: 280px;
   z-index: 2;
   border-radius: 0 !important;
- }
+}
 
 .MuiDrawer-paper .MuiPaper-root {
   border-radius: 0 !important;
-  color:#000
+  color: #000;
 }
 
 .dapp-sidebar {
@@ -14,7 +14,7 @@
   overflow: hidden;
   border-radius: 0 !important;
   &.mobile {
-      .logo {
+    .logo {
       padding-left: 35px;
       display: block;
       margin-top: 40px;
@@ -31,10 +31,11 @@
     padding: 12px 14px;
     margin-top: 0;
     margin-bottom: 0;
-    font-weight: 600 !important; 
+    font-weight: 600 !important;
     margin-left: 0;
-    span,img {
-    font-weight: 600 !important; 
+    span,
+    img {
+      font-weight: 600 !important;
     }
     span div {
       border-radius: 5px;
@@ -174,7 +175,7 @@
   }
 }
 
-.bond-discounts {
+.option-discounts {
   text-align: left;
   color: #666666;
   padding-left: 48px;
@@ -182,7 +183,7 @@
   > p {
     margin-bottom: 6px;
   }
-  .bond {
+  .option {
     display: block;
     padding: unset;
     // margin-bottom: 0 0 1px 0;
@@ -192,7 +193,7 @@
     margin: 0;
 
     text-decoration: none !important;
-    .bond-pair-roi {
+    .option-pair-roi {
       float: right;
       // margin-left: 33px;
     }
@@ -249,7 +250,7 @@
   .dapp-nav {
     .dapp-menu-data.discounts {
       margin-top: 2.5em;
-      .bond-discounts {
+      .option-discounts {
         display: none;
       }
     }

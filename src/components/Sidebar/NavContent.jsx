@@ -4,7 +4,7 @@ import Social from "./Social";
 import externalUrls from "./externalUrls";
 import StakeIcon from "../../assets/icons/stake.png";
 import GlobeIcon from "../../assets/icons/globe.png";
-import BondIcon from "../../assets/icons/bond.png";
+import OptionIcon from "../../assets/icons/option.png";
 import DashboardIcon from "../../assets/icons/dashboard.png";
 import SpookyswapIcon from "../../assets/icons/spookyswap.png";
 import WrapIcon from "../../assets/icons/wrap.png";
@@ -12,14 +12,7 @@ import WrapIcon from "../../assets/icons/wrap.png";
 import { Trans } from "@lingui/macro";
 import { trim, shorten } from "../../helpers";
 import { useAddress, useWeb3Context } from "src/hooks/web3Context";
-import {
-  Paper,
-  Link,
-  Box,
-  Typography,
-  Chip,
-  useMediaQuery,
-} from "@material-ui/core";
+import { Paper, Link, Box, Typography, Chip, useMediaQuery } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import "./sidebar.scss";
 import AppLogo from "./app_logo.svg";
@@ -49,11 +42,7 @@ function NavContent() {
     if (currentPath.indexOf("calculator") >= 0 && page === "calculator") {
       return true;
     }
-    if (
-      (currentPath.indexOf("bonds") >= 0 ||
-        currentPath.indexOf("choose_bond") >= 0) &&
-      page === "bonds"
-    ) {
+    if ((currentPath.indexOf("options") >= 0 || currentPath.indexOf("choose_option") >= 0) && page === "options") {
       return true;
     }
     if (currentPath === "" || page === "home") {
@@ -62,17 +51,8 @@ function NavContent() {
     return false;
   }, []);
   return (
-    <Paper
-      className={`dapp-sidebar ${isSmallerScreen && "tablet"} ${
-        isSmallScreen && "mobile"
-      }`}
-    >
-      <Box
-        className="dapp-sidebar-inner"
-        display="flex"
-        justifyContent="space-between"
-        flexDirection="column"
-      >
+    <Paper className={`dapp-sidebar ${isSmallerScreen && "tablet"} ${isSmallScreen && "mobile"}`}>
+      <Box className="dapp-sidebar-inner" display="flex" justifyContent="space-between" flexDirection="column">
         <div className="dapp-menu-top">
           <Box className="branding-header">
             {/* <Link href="https://olympusdao.finance" target="_blank">
@@ -92,10 +72,7 @@ function NavContent() {
 
             {address && (
               <div className="wallet-link">
-                <Link
-                  href={`https://ftmscan.com/address/${address}`}
-                  target="_blank"
-                >
+                <Link href={`https://ftmscan.com/address/${address}`} target="_blank">
                   {shorten(address)}
                 </Link>
               </div>
@@ -124,7 +101,7 @@ function NavContent() {
                 className={`button-dapp-menu ${isActive ? "active" : ""}`}
                 href="https://spookyswap.finance/add/0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E/0x59a1BffBbb1d7b5bd21A3495b0C85027C888cE78"
                 //* To activate the link remove the onClick function
-                onClick={(e) => e.preventDefault()}
+                onClick={e => e.preventDefault()}
                 target="_blank"
               >
                 <Typography component="span" variant="button">
@@ -157,7 +134,7 @@ function NavContent() {
                   return checkPage(match, location, "wrap");
                 }}
                 //* To activate the link remove the onClick function
-                onClick={(e) => e.preventDefault()}
+                onClick={e => e.preventDefault()}
                 className={`button-dapp-menu ${isActive ? "active" : ""}`}
               >
                 <Typography component="span" variant="button">
@@ -169,19 +146,19 @@ function NavContent() {
 
               <Link
                 component={NavLink}
-                id="bond-nav"
-                to="/bonds"
+                id="option-nav"
+                to="/options"
                 isActive={(match, location) => {
-                  return checkPage(match, location, "bonds");
+                  return checkPage(match, location, "options");
                 }}
                 className={`button-dapp-menu ${isActive ? "active" : ""}`}
               >
                 <Typography component="span" variant="button">
-                  <img src={BondIcon} alt="Bond" />
+                  <img src={OptionIcon} alt="Option" />
 
-                  {/* <SvgIcon color="primary" component={BondIcon} viewBox="0 0 26 17" /> */}
+                  {/* <SvgIcon color="primary" component={OptionIcon} viewBox="0 0 26 17" /> */}
 
-                  <Trans>Bond</Trans>
+                  <Trans>Option</Trans>
                   <Chip label="Discount" color="secondary" size="small" />
                 </Typography>
               </Link>
@@ -210,7 +187,7 @@ function NavContent() {
                   return checkPage(match, location, "ido");
                 }}
                 //* To activate the link remove the onClick function
-                onClick={(e) => e.preventDefault()}
+                onClick={e => e.preventDefault()}
                 className={`button-dapp-menu ${isActive ? "active" : ""}`}
               >
                 <img src={WrapIcon} alt="Wrap" />
@@ -222,32 +199,15 @@ function NavContent() {
             </div>
           </div>
         </div>
-        <Box
-          className="dapp-menu-bottom"
-          display="flex"
-          justifyContent="space-between"
-          flexDirection="column"
-        >
+        <Box className="dapp-menu-bottom" display="flex" justifyContent="space-between" flexDirection="column">
           <div className="dapp-menu-external-links">
             {Object.keys(externalUrls).map((link, i) => {
               return (
-                <Link
-                  key={i}
-                  href={`${externalUrls[link].url}`}
-                  target="_blank"
-                >
-                  <Typography
-                    component="span"
-                    color="textSecondary"
-                    variant="button"
-                  >
+                <Link key={i} href={`${externalUrls[link].url}`} target="_blank">
+                  <Typography component="span" color="textSecondary" variant="button">
                     {externalUrls[link].icon}
                   </Typography>
-                  <Typography
-                    component="span"
-                    color="textSecondary"
-                    variant="button"
-                  >
+                  <Typography component="span" color="textSecondary" variant="button">
                     {externalUrls[link].title}
                   </Typography>
                 </Link>

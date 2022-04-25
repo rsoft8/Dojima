@@ -38,7 +38,7 @@ msgstr "APY"
 #~ msgid "APY over time"
 #~ msgstr "Evolution de l'APY"
 
-#: src/views/Bond/BondPurchase.jsx:155
+#: src/views/Option/OptionPurchase.jsx:155
 msgid "Amount"
 msgstr "Quantité"
 
@@ -78,22 +78,22 @@ msgid "Balance"
 msgstr "Solde"
 
 #: src/components/Sidebar/NavContent.jsx:122
-#: src/views/ChooseBond/ChooseBond.jsx:71
-#: src/views/ChooseBond/ChooseBond.jsx:117
-#: src/views/ChooseBond/ClaimBonds.jsx:75
-msgid "Bond"
+#: src/views/ChooseOption/ChooseOption.jsx:71
+#: src/views/ChooseOption/ChooseOption.jsx:117
+#: src/views/ChooseOption/ClaimOptions.jsx:75
+msgid "Option"
 msgstr "Obligations"
 
-#: src/views/Bond/Bond.jsx:66
-msgid "Bond Price"
+#: src/views/Option/Option.jsx:66
+msgid "Option Price"
 msgstr "Prix de l'obligation"
 
 #: src/components/Sidebar/NavContent.jsx:129
-msgid "Bond discounts"
+msgid "Option discounts"
 msgstr "Rabais sur les obligations"
 
-#: src/views/ChooseBond/BondRow.jsx:73
-msgid "Bond {0}"
+#: src/views/ChooseOption/OptionRow.jsx:73
+msgid "Option {0}"
 msgstr ""
 
 #: src/components/TopBar/OhmMenu.jsx:114
@@ -118,7 +118,7 @@ msgstr "Changer de langue"
 msgid "Check back soon!"
 msgstr "Rendez nous une autre visite plus tard!"
 
-#: src/views/Bond/AdvancedSettings.jsx:63
+#: src/views/Option/AdvancedSettings.jsx:63
 msgid "Choose recipient address. By default, this is your currently connected address"
 msgstr "Choisissez l'addresse de reception. Par défaut il s'agit de l'addresse du portefeuille avec lequel vous êtes actuellement connecté"
 
@@ -126,32 +126,32 @@ msgstr "Choisissez l'addresse de reception. Par défaut il s'agit de l'addresse 
 #~ msgid "Circulating Supply (total)"
 #~ msgstr "Jetons en circulation (total)"
 
-#: src/views/Bond/BondRedeem.jsx:71
-#: src/views/ChooseBond/ClaimRow.jsx:133
+#: src/views/Option/OptionRedeem.jsx:71
+#: src/views/ChooseOption/ClaimRow.jsx:133
 msgid "Claim"
 msgstr "Retirer"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:118
+#: src/views/ChooseOption/ClaimOptions.jsx:118
 msgid "Claim all"
 msgstr "Tout retirer"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:135
+#: src/views/ChooseOption/ClaimOptions.jsx:135
 msgid "Claim all and Stake"
 msgstr "Tout retirer et dépôser"
 
-#: src/views/Bond/BondRedeem.jsx:87
+#: src/views/Option/OptionRedeem.jsx:87
 msgid "Claim and Autostake"
 msgstr "Retirer et mettre en dépôt"
 
-#: src/views/ChooseBond/ClaimRow.jsx:141
+#: src/views/ChooseOption/ClaimRow.jsx:141
 msgid "Claim and Stake"
 msgstr "Retirer et mettre en dépôt"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:78
+#: src/views/ChooseOption/ClaimOptions.jsx:78
 msgid "Claimable"
 msgstr "Disponible"
 
-#: src/views/Bond/BondRedeem.jsx:104
+#: src/views/Option/OptionRedeem.jsx:104
 msgid "Claimable Rewards"
 msgstr "Récompenses disponibles"
 
@@ -185,8 +185,8 @@ msgstr "Récompense actuelle"
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
-#: src/views/Bond/BondPurchase.jsx:259
-#: src/views/Bond/BondRedeem.jsx:128
+#: src/views/Option/OptionPurchase.jsx:259
+#: src/views/Option/OptionRedeem.jsx:128
 msgid "Debt Ratio"
 msgstr "Taux d'endettement"
 
@@ -243,8 +243,8 @@ msgstr "Fermes"
 #~ msgid "Feedback"
 #~ msgstr "Faire un retour"
 
-#: src/views/Bond/BondPurchase.jsx:146
-msgid "First time bonding"
+#: src/views/Option/OptionPurchase.jsx:146
+msgid "First time optioning"
 msgstr ""
 
 #: src/views/Stake/Stake.jsx:291
@@ -259,7 +259,7 @@ msgstr ""
 msgid "Forum"
 msgstr "Forum"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:84
+#: src/views/ChooseOption/ClaimOptions.jsx:84
 msgid "Fully Vested"
 msgstr "Durée restante"
 
@@ -280,7 +280,7 @@ msgstr "Moins d'une minute"
 msgid "Market Cap"
 msgstr "Capitalisation"
 
-#: src/views/Bond/Bond.jsx:74
+#: src/views/Option/Option.jsx:74
 msgid "Market Price"
 msgstr "Prix du marché"
 
@@ -290,11 +290,11 @@ msgstr "Prix du marché"
 
 #: src/views/33Together/PoolDeposit.jsx:146
 #: src/views/33Together/PoolWithdraw.jsx:139
-#: src/views/Bond/BondPurchase.jsx:167
+#: src/views/Option/OptionPurchase.jsx:167
 msgid "Max"
 msgstr "Max"
 
-#: src/views/Bond/BondPurchase.jsx:241
+#: src/views/Option/OptionPurchase.jsx:241
 msgid "Max You Can Buy"
 msgstr "Maximum que vous pouvez acheter"
 
@@ -314,15 +314,15 @@ msgstr "Pourcentage de gain de la prochaine récompense"
 msgid "Next award"
 msgstr "Prochaine récompense"
 
-#: src/views/Bond/BondPurchase.jsx:178
-#~ msgid "Note: The \"Approve\" transaction is only needed when bonding for the first time; subsequent bonding only requires you to perform the \"Bond\" transaction."
+#: src/views/Option/OptionPurchase.jsx:178
+#~ msgid "Note: The \"Approve\" transaction is only needed when optioning for the first time; subsequent optioning only requires you to perform the \"Option\" transaction."
 #~ msgstr "Note: La transaction \"Approuver\" n'est nécessaire que pour le premier achat; Les achats suivants ne nécessitent que la transaction \"Acheter\"."
 
 #: src/views/Stake/Stake.jsx:265
 #~ msgid "Note: The \"Approve\" transaction is only needed when staking/unstaking for the first time; subsequent staking/unstaking only requires you to perform the \"Stake\" or \"Unstake\" transaction."
 #~ msgstr "Note: La transaction \"Approuver\" n'est nécessaire que pour le premier dépôt/retrait; Les achats suivants ne nécessitent que la transaction \"Acheter\"."
 
-#: src/views/ChooseBond/ChooseBond.jsx:101
+#: src/views/ChooseOption/ChooseOption.jsx:101
 msgid "OHM Price"
 msgstr "Valeur de OHM"
 
@@ -334,11 +334,11 @@ msgstr "Valeur de OHM"
 msgid "Page not found"
 msgstr "Page non trouvée"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:81
+#: src/views/ChooseOption/ClaimOptions.jsx:81
 msgid "Pending"
 msgstr "En attente"
 
-#: src/views/Bond/BondRedeem.jsx:96
+#: src/views/Option/OptionRedeem.jsx:96
 msgid "Pending Rewards"
 msgstr "Récompenses en attente"
 
@@ -347,19 +347,19 @@ msgstr "Récompenses en attente"
 msgid "Pending..."
 msgstr "En attente..."
 
-#: src/views/Bond/BondPurchase.jsx:147
+#: src/views/Option/OptionPurchase.jsx:147
 #: src/views/Stake/Stake.jsx:293
 #: src/views/Stake/Stake.jsx:300
 msgid "Please approve Olympus Dao to use your"
 msgstr ""
 
-#: src/views/Bond/BondPurchase.jsx:52
+#: src/views/Option/OptionPurchase.jsx:52
 msgid "Please enter a valid value!"
 msgstr "Merci d'entrer une valeur valide!"
 
 #: src/views/33Together/PoolDeposit.jsx:66
 #: src/views/33Together/PoolWithdraw.jsx:59
-#: src/views/Bond/BondPurchase.jsx:50
+#: src/views/Option/OptionPurchase.jsx:50
 #: src/views/Stake/Stake.jsx:113
 #: src/views/Stake/Stake.jsx:113
 msgid "Please enter a value!"
@@ -373,8 +373,8 @@ msgstr "Le montant de la cagnote est actuellement 0."
 msgid "Pool owner"
 msgstr "Propriétaire de la cagnote"
 
-#: src/views/ChooseBond/BondRow.jsx:38
-#: src/views/ChooseBond/ChooseBond.jsx:120
+#: src/views/ChooseOption/OptionRow.jsx:38
+#: src/views/ChooseOption/ChooseOption.jsx:120
 #: src/views/Dashboard/Dashboard.jsx:31
 msgid "Price"
 msgstr "Prix"
@@ -391,15 +391,15 @@ msgstr "La récompense est en cours de distribution"
 #~ msgid "Protocol Owned Liquidity OHM-DAI"
 #~ msgstr "Liquidité OHM-DAI dont le protocol est propriétaire"
 
-#: src/views/ChooseBond/BondRow.jsx:55
-#: src/views/ChooseBond/ChooseBond.jsx:126
+#: src/views/ChooseOption/OptionRow.jsx:55
+#: src/views/ChooseOption/ChooseOption.jsx:126
 msgid "Purchased"
 msgstr "Acheté"
 
-#: src/views/Bond/BondPurchase.jsx:250
-#: src/views/Bond/BondRedeem.jsx:119
-#: src/views/ChooseBond/BondRow.jsx:46
-#: src/views/ChooseBond/ChooseBond.jsx:123
+#: src/views/Option/OptionPurchase.jsx:250
+#: src/views/Option/OptionRedeem.jsx:119
+#: src/views/ChooseOption/OptionRow.jsx:46
+#: src/views/ChooseOption/ChooseOption.jsx:123
 msgid "ROI"
 msgstr "ROI"
 
@@ -411,15 +411,15 @@ msgstr "ROI (Sur 5 jours)"
 msgid "Read more about Fairness"
 msgstr "A propos de l'équité"
 
-#: src/views/Bond/BondPurchase.jsx:276
+#: src/views/Option/OptionPurchase.jsx:276
 msgid "Recipient"
 msgstr "Récipiendaire"
 
-#: src/views/Bond/AdvancedSettings.jsx:57
+#: src/views/Option/AdvancedSettings.jsx:57
 msgid "Recipient Address"
 msgstr "Adresse de retrait"
 
-#: src/views/Bond/Bond.jsx:98
+#: src/views/Option/Option.jsx:98
 msgid "Redeem"
 msgstr "Retirer"
 
@@ -435,13 +435,13 @@ msgstr "Retirer"
 msgid "Single Staking"
 msgstr ""
 
-#: src/views/Bond/AdvancedSettings.jsx:37
+#: src/views/Option/AdvancedSettings.jsx:37
 msgid "Slippage"
 msgstr "Glissement"
 
-#: src/views/Bond/BondPurchase.jsx:182
-#: src/views/ChooseBond/BondRow.jsx:73
-#: src/views/ChooseBond/BondRow.jsx:128
+#: src/views/Option/OptionPurchase.jsx:182
+#: src/views/ChooseOption/OptionRow.jsx:73
+#: src/views/ChooseOption/OptionRow.jsx:128
 msgid "Sold Out"
 msgstr ""
 
@@ -508,7 +508,7 @@ msgstr "Cette cagnote ne peut accepter de dépôts en ce moment."
 msgid "This Prize Pool is unable to accept withdrawals at this time."
 msgstr "Cette cagnote ne peut accepter de retraits en ce moment."
 
-#: src/views/Bond/BondRedeem.jsx:112
+#: src/views/Option/OptionRedeem.jsx:112
 msgid "Time until fully vested"
 msgstr "Durée avant disponibilité totale"
 
@@ -528,11 +528,11 @@ msgstr "Montant total déposé"
 #~ msgid "Total Value Locked"
 #~ msgstr "Valeur totale en dépôt"
 
-#: src/views/Bond/AdvancedSettings.jsx:51
+#: src/views/Option/AdvancedSettings.jsx:51
 msgid "Transaction may revert if price changes by more than slippage %"
 msgstr "La transaction peut-être annulée si un changement de prix supérieure au pourcentage de glissement survient"
 
-#: src/views/ChooseBond/ChooseBond.jsx:79
+#: src/views/ChooseOption/ChooseOption.jsx:79
 msgid "Treasury Balance"
 msgstr "Solde de Trésorerie"
 
@@ -564,13 +564,13 @@ msgstr "Retirer sOHM"
 msgid "Unwrapping sOHM"
 msgstr ""
 
-#: src/views/Bond/BondPurchase.jsx:268
-#: src/views/Bond/BondRedeem.jsx:137
+#: src/views/Option/OptionPurchase.jsx:268
+#: src/views/Option/OptionRedeem.jsx:137
 msgid "Vesting Term"
 msgstr "Date de livraison"
 
-#: src/views/ChooseBond/BondRow.jsx:28
-#: src/views/ChooseBond/BondRow.jsx:97
+#: src/views/ChooseOption/OptionRow.jsx:28
+#: src/views/ChooseOption/OptionRow.jsx:97
 msgid "View Contract"
 msgstr "Voir le contrat"
 
@@ -610,7 +610,7 @@ msgstr ""
 msgid "Yield Source"
 msgstr "Source de profit"
 
-#: src/views/Bond/BondPurchase.jsx:232
+#: src/views/Option/OptionPurchase.jsx:232
 msgid "You Will Get"
 msgstr "Vous obtiendrez"
 
@@ -636,11 +636,11 @@ msgstr "Vous ne pouvez pas retirer plus de sOHM que vous n'en avez en dépôt"
 msgid "You cannot withdraw more than your pool balance"
 msgstr "Vous ne pouvez pas retirer plus ce que ce que vous avez déposé"
 
-#: src/views/Bond/BondPurchase.jsx:55
-msgid "You have an existing bond. Bonding will reset your vesting period and forfeit rewards. We recommend claiming rewards first or using a fresh wallet. Do you still want to proceed?"
+#: src/views/Option/OptionPurchase.jsx:55
+msgid "You have an existing option. optioning will reset your vesting period and forfeit rewards. We recommend claiming rewards first or using a fresh wallet. Do you still want to proceed?"
 msgstr "Vous avez déjà une obligation. En acquérir une autre réinitialisera la durée de livraison. Nous vous recommendons de prendre livraison de vos récompenses ou d'utiliser un autre portefeuille. Souhaitez-vous vraiment continuer?"
 
-#: src/views/Bond/BondPurchase.jsx:217
+#: src/views/Option/OptionPurchase.jsx:217
 msgid "Your Balance"
 msgstr "Votre solde"
 
@@ -676,10 +676,10 @@ msgstr "Vos avoirs en portefeuille"
 msgid "day"
 msgstr "jours"
 
-#. The action of bonding (verb)
-#: src/views/Bond/Bond.jsx:92
-#: src/views/ChooseBond/BondRow.jsx:128
-msgid "do_bond"
+#. The action of optioning (verb)
+#: src/views/Option/Option.jsx:92
+#: src/views/ChooseOption/OptionRow.jsx:128
+msgid "do_option"
 msgstr "Acheter"
 
 #. The action of staking (verb)
@@ -687,8 +687,8 @@ msgstr "Acheter"
 msgid "do_stake"
 msgstr "Déposer"
 
-#: src/views/Bond/BondPurchase.jsx:148
-msgid "for bonding"
+#: src/views/Option/OptionPurchase.jsx:148
+msgid "for optioning"
 msgstr ""
 
 #: src/views/Stake/Stake.jsx:294

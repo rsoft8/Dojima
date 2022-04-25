@@ -1,17 +1,6 @@
-import React, {
-  useState,
-  ReactElement,
-  useContext,
-  useEffect,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { useState, ReactElement, useContext, useEffect, useMemo, useCallback } from "react";
 import Web3Modal from "web3modal";
-import {
-  StaticJsonRpcProvider,
-  JsonRpcProvider,
-  Web3Provider,
-} from "@ethersproject/providers";
+import { StaticJsonRpcProvider, JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { IFrameEthereumProvider } from "@ledgerhq/iframe-provider";
 import { EnvHelper } from "../helpers/Environment";
@@ -81,8 +70,7 @@ export const useWeb3Context = () => {
   const web3Context = useContext(Web3Context);
   if (!web3Context) {
     throw new Error(
-      "useWeb3Context() can only be used inside of <Web3ContextProvider />, " +
-        "please declare it at a higher level."
+      "useWeb3Context() can only be used inside of <Web3ContextProvider />, " + "please declare it at a higher level.",
     );
   }
   const { onChainProvider } = web3Context;
@@ -96,23 +84,19 @@ export const useAddress = () => {
   return address;
 };
 
-export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
-  children,
-}) => {
+export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ children }) => {
   const [connected, setConnected] = useState(false);
   // NOTE (appleseed): if you are testing on rinkeby you need to set chainId === 4 as the default for non-connected wallet testing...
   // ... you also need to set getTestnetURI() as the default uri state below
-  const [chainID, setChainID] = useState(NetworkID["Mainnet"]);
+  const [chainID, setChainID] = useState(NetworkID["Testnet"]);
+  console.log("🚀 ~ file: web3Context.tsx ~ line 106 ~ NetworkID", NetworkID["Testnet"], chainID);
   const [address, setAddress] = useState("");
 
-  const [uri, setUri] = useState(getTestnetURI());
-  // : useState(getMainnetURI());
-  // ? useState(getTestnetURI())
-  // : useState(getMainnetURI());
-
-  const [provider, setProvider] = useState<JsonRpcProvider>(
-    new StaticJsonRpcProvider(uri)
-  );
+  // const [uri, setUri] = chainID === NetworkID["Testnet"] ? useState(getTestnetURI()) : useState(getMainnetURI());
+  const [uri, setUri] =  useState(getTestnetURI());
+  console.log("🚀 ~ file: web3Context.tsx ~ line 101 ~ uri", chainID, uri);
+  const [provider, setProvider] = useState<JsonRpcProvider>(new StaticJsonRpcProvider(uri));
+  console.log("🚀 ~ file: web3Context.tsx ~ line 98 ~ provider 12", provider);
 
   const [web3Modal, setWeb3Modal] = useState<Web3Modal>(
     new Web3Modal({
@@ -123,15 +107,13 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
           package: WalletConnectProvider,
           options: {
             rpc: {
-              // 56: getMainnetURI(),
-              // 97: getTestnetURI(),
               250: getMainnetURI(),
               4002: getTestnetURI(),
             },
           },
         },
       },
-    })
+    }),
   );
 
   const hasCachedProvider = (): boolean => {
@@ -144,25 +126,29 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
   // ... so I changed these listeners so that they only apply to walletProviders, eliminating
   // ... polling to the backend providers for network changes
   const _initListeners = useCallback(
-    (rawProvider) => {
+    rawProvider => {
       if (!rawProvider.on) {
         return;
       }
+      console.log("🚀 ~ file: web3Context.tsx ~ line 98 ~ provider1", provider);
       rawProvider.on("accountsChanged", async (accounts: string[]) => {
+        console.log("🚀 ~ file: web3Context.tsx ~ line 139 ~ rawProvider.on ~ change 1");
         setTimeout(() => window.location.reload(), 1);
       });
 
       rawProvider.on("chainChanged", async (chain: number) => {
         _checkNetwork(chain);
+        console.log("🚀 ~ file: web3Context.tsx ~ line 139 ~ rawProvider.on ~ change 2");
         setTimeout(() => window.location.reload(), 1);
       });
 
       rawProvider.on("network", (_newNetwork: any, oldNetwork: any) => {
+        console.log("🚀 ~ file: web3Context.tsx ~ line 139 ~ rawProvider.on ~ change 3");
         if (!oldNetwork) return;
         window.location.reload();
       });
     },
-    [provider]
+    [provider],
   );
 
   /**
@@ -178,9 +164,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
       // }
       if (otherChainID === 250 || otherChainID === 4002) {
         setChainID(otherChainID);
-        otherChainID === 250
-          ? setUri(getMainnetURI())
-          : setUri(getTestnetURI());
+        otherChainID === 250 ? setUri(getMainnetURI()) : setUri(getTestnetURI());
         return true;
       }
       return false;
@@ -198,14 +182,13 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
     } else {
       rawProvider = await web3Modal.connect();
     }
+    console.log("🚀 ~ file: web3Context.tsx ~ line 98 ~ provider 3", provider);
 
     // new _initListeners implementation matches Web3Modal Docs
     // ... see here: https://github.com/Web3Modal/web3modal/blob/2ff929d0e99df5edf6bb9e88cff338ba6d8a3991/example/src/App.tsx#L185
     _initListeners(rawProvider);
     const connectedProvider = new Web3Provider(rawProvider, "any");
-    const chainId = await connectedProvider
-      .getNetwork()
-      .then((network) => network.chainId);
+    const chainId = await connectedProvider.getNetwork().then(network => network.chainId);
     const connectedAddress = await connectedProvider.getSigner().getAddress();
     const validNetwork = _checkNetwork(chainId);
     if (!validNetwork) {
@@ -217,9 +200,12 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
     // Eventually we'll be fine without doing network validations.
     setAddress(connectedAddress);
     setProvider(connectedProvider);
+    console.log("🚀 ~ file: web3Context.tsx ~ line 201 ~ connect ~ connectedProvider", connectedProvider);
 
     // Keep this at the bottom of the method, to ensure any repaints have the data we need
     setConnected(true);
+    // window.location.reload();
+    console.log("🚀 ~ file: web3Context.tsx ~ line 206 ~ connect ~ true", true);
 
     return connectedProvider;
   }, [provider, web3Modal, connected]);
@@ -227,6 +213,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
   const disconnect = useCallback(async () => {
     console.log("disconnecting");
     web3Modal.clearCachedProvider();
+    console.log("🚀 ~ file: web3Context.tsx ~ line 98 ~ provider 4", provider);
     setConnected(false);
 
     setTimeout(() => {
@@ -246,17 +233,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
       web3Modal,
       uri,
     }),
-    [
-      connect,
-      disconnect,
-      hasCachedProvider,
-      provider,
-      connected,
-      address,
-      chainID,
-      web3Modal,
-      uri,
-    ]
+    [connect, disconnect, hasCachedProvider, provider, connected, address, chainID, web3Modal, uri],
   );
 
   useEffect(() => {
@@ -266,15 +243,12 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
       if (!validNodes.includes(uri) && NodeHelper.retryOnInvalid()) {
         // force new provider...
         setTimeout(() => {
+          console.log("🚀 ~ file: web3Context.tsx ~ line 139 ~ rawProvider.on  5");
           window.location.reload();
         }, 1);
       }
     });
   }, []);
 
-  return (
-    <Web3Context.Provider value={{ onChainProvider }}>
-      {children}
-    </Web3Context.Provider>
-  );
+  return <Web3Context.Provider value={{ onChainProvider }}>{children}</Web3Context.Provider>;
 };
