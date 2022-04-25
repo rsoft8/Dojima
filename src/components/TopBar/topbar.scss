@@ -19,7 +19,11 @@
     }
   }
 }
-
+@media (max-width: 800px) {
+  .white-bg {
+    background-color: #fff !important;
+  }
+}
 .connect-btn {
   border: 0.4px solid rgb(41, 46, 186);
   background: white;

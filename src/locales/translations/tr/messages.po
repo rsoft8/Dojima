@@ -34,7 +34,7 @@ msgstr "YFG"
 #~ msgid "APY over time"
 #~ msgstr "Zaman içinde YFG"
 
-#: src/views/Bond/BondPurchase.jsx:155
+#: src/views/Option/OptionPurchase.jsx:155
 msgid "Amount"
 msgstr "Miktar"
 
@@ -70,22 +70,22 @@ msgid "Balance"
 msgstr "Bakiye"
 
 #: src/components/Sidebar/NavContent.jsx:122
-#: src/views/ChooseBond/ChooseBond.jsx:71
-#: src/views/ChooseBond/ChooseBond.jsx:117
-#: src/views/ChooseBond/ClaimBonds.jsx:75
-msgid "Bond"
+#: src/views/ChooseOption/ChooseOption.jsx:71
+#: src/views/ChooseOption/ChooseOption.jsx:117
+#: src/views/ChooseOption/ClaimOptions.jsx:75
+msgid "Option"
 msgstr "Bono"
 
-#: src/views/Bond/Bond.jsx:66
-msgid "Bond Price"
+#: src/views/Option/Option.jsx:66
+msgid "Option Price"
 msgstr "Bono fiyatı"
 
 #: src/components/Sidebar/NavContent.jsx:129
-msgid "Bond discounts"
+msgid "Option discounts"
 msgstr "Bono indirimleri"
 
-#: src/views/ChooseBond/BondRow.jsx:73
-msgid "Bond {0}"
+#: src/views/ChooseOption/OptionRow.jsx:73
+msgid "Option {0}"
 msgstr ""
 
 #: src/components/TopBar/OhmMenu.jsx:104
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Check back soon!"
 msgstr "Daha sonra yeniden kontrol edin."
 
-#: src/views/Bond/AdvancedSettings.jsx:63
+#: src/views/Option/AdvancedSettings.jsx:63
 msgid "Choose recipient address. By default, this is your currently connected address"
 msgstr "Alıcı adresi seçiniz. Varsayılan olarak, bu şu an bağlı olan adresinizdir."
 
@@ -127,32 +127,32 @@ msgstr "Alıcı adresi seçiniz. Varsayılan olarak, bu şu an bağlı olan adre
 #~ msgid "Circulating Supply (total)"
 #~ msgstr "Dolaşımdaki Arz (Toplam)"
 
-#: src/views/Bond/BondRedeem.jsx:71
-#: src/views/ChooseBond/ClaimRow.jsx:133
+#: src/views/Option/OptionRedeem.jsx:71
+#: src/views/ChooseOption/ClaimRow.jsx:133
 msgid "Claim"
 msgstr "Çek"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:118
+#: src/views/ChooseOption/ClaimOptions.jsx:118
 msgid "Claim all"
 msgstr "Hepsini çek"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:135
+#: src/views/ChooseOption/ClaimOptions.jsx:135
 msgid "Claim all and Stake"
 msgstr "Hepsini çek ve yatır"
 
-#: src/views/Bond/BondRedeem.jsx:87
+#: src/views/Option/OptionRedeem.jsx:87
 msgid "Claim and Autostake"
 msgstr "Çek ve Otomatik yatır"
 
-#: src/views/ChooseBond/ClaimRow.jsx:141
+#: src/views/ChooseOption/ClaimRow.jsx:141
 msgid "Claim and Stake"
 msgstr "Çek ve yatır"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:78
+#: src/views/ChooseOption/ClaimOptions.jsx:78
 msgid "Claimable"
 msgstr "Çekilebilir"
 
-#: src/views/Bond/BondRedeem.jsx:104
+#: src/views/Option/OptionRedeem.jsx:104
 msgid "Claimable Rewards"
 msgstr "Mevcut Çekilebilir Bakiye"
 
@@ -182,8 +182,8 @@ msgstr "Mevcut Ödül"
 msgid "Dashboard"
 msgstr "Gösterge Panosu"
 
-#: src/views/Bond/BondPurchase.jsx:259
-#: src/views/Bond/BondRedeem.jsx:128
+#: src/views/Option/OptionPurchase.jsx:259
+#: src/views/Option/OptionRedeem.jsx:128
 msgid "Debt Ratio"
 msgstr "Borç oranı"
 
@@ -240,8 +240,8 @@ msgstr "Farm Havuzu"
 #~ msgid "Feedback"
 #~ msgstr "Geri bildirim"
 
-#: src/views/Bond/BondPurchase.jsx:146
-msgid "First time bonding"
+#: src/views/Option/OptionPurchase.jsx:146
+msgid "First time optioning"
 msgstr ""
 
 #: src/views/Stake/Stake.jsx:291
@@ -256,7 +256,7 @@ msgstr ""
 msgid "Forum"
 msgstr "Forum"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:84
+#: src/views/ChooseOption/ClaimOptions.jsx:84
 msgid "Fully Vested"
 msgstr "Süresi tamamlanmış"
 
@@ -277,7 +277,7 @@ msgstr "Bir dakikadan az süre"
 msgid "Market Cap"
 msgstr "Piyasa Değeri"
 
-#: src/views/Bond/Bond.jsx:74
+#: src/views/Option/Option.jsx:74
 msgid "Market Price"
 msgstr "Piyasa Fiyatı"
 
@@ -287,11 +287,11 @@ msgstr "Piyasa Fiyatı"
 
 #: src/views/33Together/PoolDeposit.jsx:146
 #: src/views/33Together/PoolWithdraw.jsx:139
-#: src/views/Bond/BondPurchase.jsx:167
+#: src/views/Option/OptionPurchase.jsx:167
 msgid "Max"
 msgstr "Maks."
 
-#: src/views/Bond/BondPurchase.jsx:241
+#: src/views/Option/OptionPurchase.jsx:241
 msgid "Max You Can Buy"
 msgstr "Satın alabileceğiniz maksimum miktar"
 
@@ -311,7 +311,7 @@ msgstr "Sıradaki Faiz Yüzdesi"
 msgid "Next award"
 msgstr "Sıradaki Çekiliş"
 
-#: src/views/ChooseBond/ChooseBond.jsx:101
+#: src/views/ChooseOption/ChooseOption.jsx:101
 msgid "OHM Price"
 msgstr "OHM Fiyatı"
 
@@ -323,11 +323,11 @@ msgstr "OHM Fiyatı"
 msgid "Page not found"
 msgstr "Sayfa bulunamadı."
 
-#: src/views/ChooseBond/ClaimBonds.jsx:81
+#: src/views/ChooseOption/ClaimOptions.jsx:81
 msgid "Pending"
 msgstr "Kalan"
 
-#: src/views/Bond/BondRedeem.jsx:96
+#: src/views/Option/OptionRedeem.jsx:96
 msgid "Pending Rewards"
 msgstr "Kalan miktar"
 
@@ -336,19 +336,19 @@ msgstr "Kalan miktar"
 msgid "Pending..."
 msgstr "İşleniyor..."
 
-#: src/views/Bond/BondPurchase.jsx:147
+#: src/views/Option/OptionPurchase.jsx:147
 #: src/views/Stake/Stake.jsx:293
 #: src/views/Stake/Stake.jsx:300
 msgid "Please approve Olympus Dao to use your"
 msgstr ""
 
-#: src/views/Bond/BondPurchase.jsx:52
+#: src/views/Option/OptionPurchase.jsx:52
 msgid "Please enter a valid value!"
 msgstr "Lütfen geçerli bir değer giriniz."
 
 #: src/views/33Together/PoolDeposit.jsx:66
 #: src/views/33Together/PoolWithdraw.jsx:59
-#: src/views/Bond/BondPurchase.jsx:50
+#: src/views/Option/OptionPurchase.jsx:50
 #: src/views/Stake/Stake.jsx:113
 #: src/views/Stake/Stake.jsx:113
 msgid "Please enter a value!"
@@ -362,8 +362,8 @@ msgstr "Havuzdaki Ödül miktarı şu an 0."
 msgid "Pool owner"
 msgstr "Havuz Sahibi"
 
-#: src/views/ChooseBond/BondRow.jsx:38
-#: src/views/ChooseBond/ChooseBond.jsx:120
+#: src/views/ChooseOption/OptionRow.jsx:38
+#: src/views/ChooseOption/ChooseOption.jsx:120
 #: src/views/Dashboard/Dashboard.jsx:31
 msgid "Price"
 msgstr "Fiyat"
@@ -380,15 +380,15 @@ msgstr "Ödül dağıtılıyor"
 #~ msgid "Protocol Owned Liquidity OHM-DAI"
 #~ msgstr "Protokole Ait OHM-DAI Likiditesi"
 
-#: src/views/ChooseBond/BondRow.jsx:55
-#: src/views/ChooseBond/ChooseBond.jsx:126
+#: src/views/ChooseOption/OptionRow.jsx:55
+#: src/views/ChooseOption/ChooseOption.jsx:126
 msgid "Purchased"
 msgstr "Satın alınan Miktar"
 
-#: src/views/Bond/BondPurchase.jsx:250
-#: src/views/Bond/BondRedeem.jsx:119
-#: src/views/ChooseBond/BondRow.jsx:46
-#: src/views/ChooseBond/ChooseBond.jsx:123
+#: src/views/Option/OptionPurchase.jsx:250
+#: src/views/Option/OptionRedeem.jsx:119
+#: src/views/ChooseOption/OptionRow.jsx:46
+#: src/views/ChooseOption/ChooseOption.jsx:123
 msgid "ROI"
 msgstr "Getiri"
 
@@ -400,15 +400,15 @@ msgstr "5 Günlük Getiri Oranı"
 msgid "Read more about Fairness"
 msgstr "Eşitlik hakkında daha fazla bilgi edinin"
 
-#: src/views/Bond/BondPurchase.jsx:276
+#: src/views/Option/OptionPurchase.jsx:276
 msgid "Recipient"
 msgstr "Alıcı"
 
-#: src/views/Bond/AdvancedSettings.jsx:57
+#: src/views/Option/AdvancedSettings.jsx:57
 msgid "Recipient Address"
 msgstr "Alıcı adresi"
 
-#: src/views/Bond/Bond.jsx:98
+#: src/views/Option/Option.jsx:98
 msgid "Redeem"
 msgstr "Çek"
 
@@ -424,13 +424,13 @@ msgstr "Çek"
 msgid "Single Staking"
 msgstr ""
 
-#: src/views/Bond/AdvancedSettings.jsx:37
+#: src/views/Option/AdvancedSettings.jsx:37
 msgid "Slippage"
 msgstr "Slipaj"
 
-#: src/views/Bond/BondPurchase.jsx:182
-#: src/views/ChooseBond/BondRow.jsx:73
-#: src/views/ChooseBond/BondRow.jsx:128
+#: src/views/Option/OptionPurchase.jsx:182
+#: src/views/ChooseOption/OptionRow.jsx:73
+#: src/views/ChooseOption/OptionRow.jsx:128
 msgid "Sold Out"
 msgstr ""
 
@@ -484,7 +484,7 @@ msgstr "Ödül havuzuna şu an para yatırılamıyor."
 msgid "This Prize Pool is unable to accept withdrawals at this time."
 msgstr "Ödül havuzundan şu an para çekilemiyor."
 
-#: src/views/Bond/BondRedeem.jsx:112
+#: src/views/Option/OptionRedeem.jsx:112
 msgid "Time until fully vested"
 msgstr "Tamamlanmasına kalan süre"
 
@@ -500,11 +500,11 @@ msgstr "Toplam Sponsor Miktarı"
 msgid "Total Value Deposited"
 msgstr "Yatırılmış Toplam Değer"
 
-#: src/views/Bond/AdvancedSettings.jsx:51
+#: src/views/Option/AdvancedSettings.jsx:51
 msgid "Transaction may revert if price changes by more than slippage %"
 msgstr "Fiyat slipaj yüzdesinden daha fazla değişirse işlem iptal olabilir"
 
-#: src/views/ChooseBond/ChooseBond.jsx:79
+#: src/views/ChooseOption/ChooseOption.jsx:79
 msgid "Treasury Balance"
 msgstr "Hazine Bakiyesi"
 
@@ -532,13 +532,13 @@ msgstr "sOHM çekiliyor"
 msgid "Unwrapping sOHM"
 msgstr ""
 
-#: src/views/Bond/BondPurchase.jsx:268
-#: src/views/Bond/BondRedeem.jsx:137
+#: src/views/Option/OptionPurchase.jsx:268
+#: src/views/Option/OptionRedeem.jsx:137
 msgid "Vesting Term"
 msgstr "Tamamlanma Süresi"
 
-#: src/views/ChooseBond/BondRow.jsx:28
-#: src/views/ChooseBond/BondRow.jsx:97
+#: src/views/ChooseOption/OptionRow.jsx:28
+#: src/views/ChooseOption/OptionRow.jsx:97
 msgid "View Contract"
 msgstr "Sözleşmeyi görüntüle"
 
@@ -578,7 +578,7 @@ msgstr ""
 msgid "Yield Source"
 msgstr "Getiri Kaynağı"
 
-#: src/views/Bond/BondPurchase.jsx:232
+#: src/views/Option/OptionPurchase.jsx:232
 msgid "You Will Get"
 msgstr "Alacağınız Miktar"
 
@@ -600,11 +600,11 @@ msgstr "sOHM bakiyenizden daha fazla olan bir değeri çekemezsiniz."
 msgid "You cannot withdraw more than your pool balance"
 msgstr "Havuz bakiyenizden daha büyük bir değeri çekemezsiniz."
 
-#: src/views/Bond/BondPurchase.jsx:55
-msgid "You have an existing bond. Bonding will reset your vesting period and forfeit rewards. We recommend claiming rewards first or using a fresh wallet. Do you still want to proceed?"
+#: src/views/Option/OptionPurchase.jsx:55
+msgid "You have an existing option. optioning will reset your vesting period and forfeit rewards. We recommend claiming rewards first or using a fresh wallet. Do you still want to proceed?"
 msgstr "Mevcut bir Bononuz bulunuyor. Teker Bono satın almak mevcut bononuzun süresini sıfırlayacak ve ödüllerinizden caymış olacaksınız. İlk önce ödüllerinizi çekmenizi veya yeni bir cüzdan kullanmanızı öneririz. Yine de devam etmek istiyor musunuz?"
 
-#: src/views/Bond/BondPurchase.jsx:217
+#: src/views/Option/OptionPurchase.jsx:217
 msgid "Your Balance"
 msgstr "Mevcut Bakiyeniz"
 
@@ -640,10 +640,10 @@ msgstr "Cüzdan bakiyeniz"
 msgid "day"
 msgstr "gün"
 
-#. The action of bonding (verb)
-#: src/views/Bond/Bond.jsx:92
-#: src/views/ChooseBond/BondRow.jsx:128
-msgid "do_bond"
+#. The action of optioning (verb)
+#: src/views/Option/Option.jsx:92
+#: src/views/ChooseOption/OptionRow.jsx:128
+msgid "do_option"
 msgstr ""
 
 #. The action of staking (verb)
@@ -651,8 +651,8 @@ msgstr ""
 msgid "do_stake"
 msgstr ""
 
-#: src/views/Bond/BondPurchase.jsx:148
-msgid "for bonding"
+#: src/views/Option/OptionPurchase.jsx:148
+msgid "for optioning"
 msgstr ""
 
 #: src/views/Stake/Stake.jsx:294

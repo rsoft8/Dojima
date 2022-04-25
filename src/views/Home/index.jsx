@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  Divider,
-  makeStyles,
-  Paper,
-  Typography,
-} from "@material-ui/core";
+import { Box, Button, Divider, makeStyles, Paper, SvgIcon, Typography } from "@material-ui/core";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import "./style.scss";
@@ -19,18 +12,44 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TransitionDailog from "src/components/Dailoge/TransitionDailog";
 
-import { CardHeader } from "@mui/material";
+import { CardHeader, Skeleton } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { useWeb3Context } from "src/hooks/web3Context";
+import useOptions from "src/hooks/Options";
+import { setSelected } from "src/slices/OptionSlice";
 function Home() {
-  const array = [1, 1, 1, 1, 1, 1];
+  const { chainID, connect, connected } = useWeb3Context();
+  console.log("🚀 ~ file: index.jsx ~ line 22 ~ Home ~ connected", connected);
+
   const primaryColor = "#2042B3";
-  const [purchaseDialoge, setPurchaseDialoge] = useState(false);
+  const dispatch = useDispatch();
+  const { options } = useOptions(chainID);
   const [exerciseDialoge, setExerciseDialoge] = useState(false);
+  const allOptions = useSelector(({ optioning: { allOptions } }) =>
+    Object.keys(allOptions).map(key => allOptions[key]),
+  );
+  const [purchaseOption, setPurchaseOption] = useState(false);
+  console.log("🚀 ~ file: index.jsx ~ line 29 ~ Home ~ allOptions", allOptions);
   const tableHeader = {
-    fontSize: 16,
-    paddingY: 2,
+    fontSize: 12,
+    paddingY: 1,
     paddingX: 3,
   };
-  const tableValue = { fontSize: 16, padding: 0 };
+  const tableValue = {
+    fontSize: 12,
+    padding: 1,
+  };
+
+  const handleClick = (id, type) => {
+    if (connected) {
+      dispatch(setSelected(id));
+      if (type == "Purchase") setPurchaseOption(true);
+      else setExerciseDialoge(true);
+    } else {
+      connect();
+    }
+  };
+
   return (
     <div id="home-view">
       <Box className="container">
@@ -80,40 +99,156 @@ function Home() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {array.map((row) => (
-                <TableRow
-                  key={row.name}
-                  sx={{
-                    "&:last-child td, &:last-child th": { border: 0 },
-                  }}
-                >
-                  <TableCell sx={tableValue} align="center">
-                    FTO-ETH
-                  </TableCell>
-                  <TableCell sx={tableValue} align="center">
-                    FTO
-                  </TableCell>
-                  <TableCell sx={tableValue} align="center">
-                    5 $
-                  </TableCell>
-                  <TableCell sx={tableValue} align="center">
-                    500 $
-                  </TableCell>
-                  <TableCell sx={tableValue} align="center">
-                    1000/10,000
-                  </TableCell>
-                  <TableCell sx={tableValue} align="center">
-                    100
-                  </TableCell>
-                  <TableCell sx={tableValue} align="center">
-                    30 Days
-                  </TableCell>
-                  <TableCell
-                    className="row-btn"
-                    component="th"
-                    scope="row"
-                    align="center"
-                  >
+              {allOptions.length == options.length
+                ? allOptions?.map(item => (
+                    <TableRow
+                      key={item.optionID}
+                      sx={{
+                        "&:last-child td, &:last-child th": {
+                          border: 0,
+                          paddingBottom: 3,
+                        },
+                      }}
+                    >
+                      <TableCell sx={tableValue} align="center">
+                        <img src={item.option.optionIcon} className="item-image" />
+                        {item.option.optionName}
+                      </TableCell>
+                      <TableCell sx={tableValue} align="center">
+                        <img src={item.option.optionIcon} className="item-image" />
+                        {item.underlyingSymbol}
+                      </TableCell>
+                      <TableCell sx={tableValue} align="center">
+                        {item.swapAssetAmt / item.underlyingAmt} $
+                      </TableCell>
+                      <TableCell sx={tableValue} align="center">
+                        {item.marketPrice} $
+                      </TableCell>
+                      <TableCell sx={tableValue} align="center">
+                        {item.optionAvailableBalance} / {item.optionTotalBalance}
+                      </TableCell>
+                      <TableCell sx={tableValue} align="center">
+                        {item.optionPrice}
+                      </TableCell>
+                      <TableCell sx={tableValue} align="center">
+                        {item.expiryTime}
+                      </TableCell>
+                      <TableCell className="row-btn" component="th" scope="row" align="center">
+                        <Button
+                          variant="contained"
+                          style={{
+                            background: primaryColor,
+                            color: "#fff",
+                            textTransform: "none",
+                            borderRadius: 8,
+                            paddingTop: 0,
+                            paddingBottom: 0,
+                          }}
+                          onClick={() => handleClick(item.optionID, "Purchase")}
+                        >
+                          <p className="row-btn-text">Purchanse Options</p>
+                        </Button>
+                      </TableCell>
+                      <TableCell className="row-btn" align="center">
+                        <Button
+                          variant="outlined"
+                          style={{
+                            borderColor: "#AFAFAF",
+                            color: "#AFAFAF",
+                            textTransform: "none",
+                            borderRadius: 8,
+                            paddingTop: 0,
+                            paddingBottom: 0,
+                            marginRight: 5,
+                          }}
+                          onClick={() => handleClick(item.optionID, "Exercise")}
+                        >
+                          <p className="row-btn-text"> Exercise Option</p>
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : options.map(item => (
+                    <TableRow
+                      key={item.optionId}
+                      sx={{
+                        "&:last-child td, &:last-child th": {
+                          border: 0,
+                          paddingBottom: 3,
+                        },
+                      }}
+                    >
+                      <TableCell sx={tableValue} align="center">
+                        <Skeleton variant="rectangular" width={100} height={20} />
+                      </TableCell>
+                      <TableCell sx={tableValue} align="center">
+                        <Skeleton variant="rectangular" width={100} height={20} />
+                        {item.underlyingSymbol}
+                      </TableCell>
+                      <TableCell sx={tableValue} align="center">
+                        <Skeleton variant="rectangular" width={100} height={20} />
+                      </TableCell>
+                      <TableCell sx={tableValue} align="center">
+                        <Skeleton variant="rectangular" width={100} height={20} />
+                      </TableCell>
+                      <TableCell sx={tableValue} align="center">
+                        <Skeleton variant="rectangular" width={100} height={20} />
+                      </TableCell>
+                      <TableCell sx={tableValue} align="center">
+                        <Skeleton variant="rectangular" width={100} height={20} />
+                      </TableCell>
+                      <TableCell sx={tableValue} align="center">
+                        <Skeleton variant="rectangular" width={100} height={20} />
+                      </TableCell>
+                      <TableCell className="row-btn" component="th" scope="row" align="center">
+                        <Skeleton variant="rectangular" width={100} height={30} />
+                      </TableCell>
+                      <TableCell className="row-btn" align="center">
+                        <Skeleton variant="rectangular" width={100} height={30} />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+            </TableBody>
+          </Table>
+        </Box>
+        <Box className="mobile-card">
+          {allOptions.length == options.length ? (
+            <>
+              {allOptions?.map(item => (
+                <Card className="main-card" elevation={10} key={item.optionID}>
+                  <Box className="card-header">
+                    <Typography variant="h6"> {item.option.optionName}</Typography>
+                    <Typography variant="h6">{item.underlyingSymbol}</Typography>
+                  </Box>
+                  <CardContent>
+                    <Box sx={{ display: "flex", flexDirection: "column" }}>
+                      <Typography variant="p">Strike Price - {item.swapAssetAmt / item.underlyingAmt} $</Typography>
+                      <Typography variant="p">Market Price - {item.marketPrice} $</Typography>
+                    </Box>
+                    <Box className="card-block">
+                      <Typography variant="p" className="bold-text">
+                        <b>Amount Available</b>
+                      </Typography>
+                      <Typography variant="p">
+                        {item.optionAvailableBalance} / {item.optionTotalBalance}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+                      <Box className="card-block">
+                        <Typography variant="p" className="bold-text">
+                          <b> {item.optionPrice}</b>
+                        </Typography>
+                        <Typography variant="p">100</Typography>
+                      </Box>
+                      <Box className="card-block">
+                        <Typography variant="p" className="bold-text">
+                          <b>Time to expiry</b>
+                        </Typography>
+                        <Typography variant="p"> {item.expiryTime}</Typography>
+                      </Box>
+                    </Box>
+                  </CardContent>
+                  <Box className="card-action">
                     <Button
                       variant="contained"
                       style={{
@@ -121,17 +256,11 @@ function Home() {
                         color: "#fff",
                         textTransform: "none",
                         borderRadius: 8,
-                        paddingTop: 3,
-                        paddingBottom: 3,
                       }}
-                      onClick={() => {
-                        setPurchaseDialoge(!purchaseDialoge);
-                      }}
+                      onClick={() => handleClick(item.optionID, "Purchase")}
                     >
                       <p className="row-btn-text">Purchanse Options</p>
                     </Button>
-                  </TableCell>
-                  <TableCell className="row-btn" align="center">
                     <Button
                       variant="outlined"
                       style={{
@@ -139,107 +268,94 @@ function Home() {
                         color: "#AFAFAF",
                         textTransform: "none",
                         borderRadius: 8,
-                        paddingTop: 3,
-                        paddingBottom: 3,
                       }}
-                      onClick={() => {
-                        setExerciseDialoge(!exerciseDialoge);
+                      onClick={() => handleClick(item.optionID, "Exercise")}
+                    >
+                      <p className="row-btn-text"> Exercise Option</p>
+                    </Button>
+                  </Box>
+                </Card>
+              ))}
+            </>
+          ) : (
+            <>
+              {options?.map(item => (
+                <Card className="main-card" elevation={10} key={item.optionId}>
+                  <Box className="card-header card-pb">
+                    <Typography variant="h6">
+                      <Skeleton variant="rectangular" width={100} height={20} />
+                    </Typography>
+                    <Typography variant="h6">
+                      <Skeleton variant="rectangular" width={100} height={20} />
+                    </Typography>
+                  </Box>
+                  <CardContent>
+                    <Box sx={{ display: "flex", flexDirection: "column" }}>
+                      <Typography variant="p" className="card-pb">
+                        <Skeleton variant="rectangular" width={100} height={20} />
+                      </Typography>
+                      <Typography variant="p">
+                        <Skeleton variant="rectangular" width={100} height={20} />
+                      </Typography>
+                    </Box>
+                    <Box className="card-block">
+                      <Typography variant="p">
+                        <Skeleton variant="rectangular" width={100} height={20} />
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+                      <Box className="card-block">
+                        <Skeleton variant="rectangular" width={100} height={20} />
+                      </Box>
+                      <Box className="card-block">
+                        <Typography variant="p">
+                          <Skeleton variant="rectangular" width={100} height={20} />
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </CardContent>
+                  <Box className="card-action">
+                    <Button
+                      variant="contained"
+                      style={{
+                        background: primaryColor,
+                        color: "#fff",
+                        textTransform: "none",
+                        borderRadius: 8,
+                      }}
+                    >
+                      <p className="row-btn-text">Purchanse Options</p>
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      style={{
+                        borderColor: "#AFAFAF",
+                        color: "#AFAFAF",
+                        textTransform: "none",
+                        borderRadius: 8,
                       }}
                     >
                       <p className="row-btn-text"> Exercise Option</p>
                     </Button>
-                  </TableCell>
-                </TableRow>
+                  </Box>
+                </Card>
               ))}
-            </TableBody>
-          </Table>
-        </Box>
-        <Box className="mobile-card">
-          {array.map((row) => (
-            <Card className="main-card" elevation={10}>
-              <Box className="card-header">
-                <Typography variant="h6">FOT - ETH2</Typography>
-                <Typography variant="h6">FOT</Typography>
-              </Box>
-              <CardContent>
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <Typography variant="p">Strike Price - 5$ </Typography>
-                  <Typography variant="p">Market Price - 5$ </Typography>
-                </Box>
-                <Box className="card-block">
-                  <Typography variant="p" className="bold-text">
-                    <b>Amount Available</b>
-                  </Typography>
-                  <Typography variant="p">1000 / 10,000</Typography>
-                </Box>
-                <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-                  <Box className="card-block">
-                    <Typography variant="p" className="bold-text">
-                      <b>Option Price</b>
-                    </Typography>
-                    <Typography variant="p">100</Typography>
-                  </Box>
-                  <Box className="card-block">
-                    <Typography variant="p" className="bold-text">
-                      <b>Time to expiry</b>
-                    </Typography>
-                    <Typography variant="p">30 Days</Typography>
-                  </Box>
-                </Box>
-              </CardContent>
-              <Box className="card-action">
-                <Button
-                  variant="contained"
-                  style={{
-                    background: primaryColor,
-                    color: "#fff",
-                    textTransform: "none",
-                    borderRadius: 8,
-                  }}
-                  onClick={() => {
-                    setPurchaseDialoge(!purchaseDialoge);
-                  }}
-                >
-                  <p className="row-btn-text">Purchanse Options</p>
-                </Button>
-                <Button
-                  variant="outlined"
-                  style={{
-                    borderColor: "#AFAFAF",
-                    color: "#AFAFAF",
-                    textTransform: "none",
-                    borderRadius: 8,
-                  }}
-                  onClick={() => {
-                    setExerciseDialoge(!exerciseDialoge);
-                  }}
-                >
-                  <p className="row-btn-text"> Exercise Option</p>
-                </Button>
-              </Box>
-            </Card>
-          ))}
+            </>
+          )}
         </Box>
       </Box>
       <TransitionDailog
-        isOpen={purchaseDialoge}
+        isOpen={purchaseOption}
         type="Purchase"
         handleClose={() => {
-          setPurchaseDialoge(!purchaseDialoge);
-        }}
-        handlePurchase={() => {
-          setPurchaseDialoge(!purchaseDialoge);
-          setExerciseDialoge(!exerciseDialoge);
+          setPurchaseOption(false);
         }}
       />
       <TransitionDailog
         isOpen={exerciseDialoge}
         type="Exercise"
         handleClose={() => {
-          setExerciseDialoge(!exerciseDialoge);
-        }}
-        handlePurchase={() => {
-          setExerciseDialoge(!exerciseDialoge);
+          setExerciseDialoge(false);
         }}
       />
     </div>

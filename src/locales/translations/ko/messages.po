@@ -42,7 +42,7 @@ msgstr "APY"
 #~ msgid "APY over time"
 #~ msgstr "APY 추이"
 
-#: src/views/Bond/BondPurchase.jsx:155
+#: src/views/Option/OptionPurchase.jsx:155
 msgid "Amount"
 msgstr "양"
 
@@ -78,22 +78,22 @@ msgid "Balance"
 msgstr "잔고"
 
 #: src/components/Sidebar/NavContent.jsx:122
-#: src/views/ChooseBond/ChooseBond.jsx:71
-#: src/views/ChooseBond/ChooseBond.jsx:117
-#: src/views/ChooseBond/ClaimBonds.jsx:75
-msgid "Bond"
+#: src/views/ChooseOption/ChooseOption.jsx:71
+#: src/views/ChooseOption/ChooseOption.jsx:117
+#: src/views/ChooseOption/ClaimOptions.jsx:75
+msgid "Option"
 msgstr "본드"
 
-#: src/views/Bond/Bond.jsx:66
-msgid "Bond Price"
+#: src/views/Option/Option.jsx:66
+msgid "Option Price"
 msgstr "본드 가격"
 
 #: src/components/Sidebar/NavContent.jsx:129
-msgid "Bond discounts"
+msgid "Option discounts"
 msgstr "본드 할인"
 
-#: src/views/ChooseBond/BondRow.jsx:73
-msgid "Bond {0}"
+#: src/views/ChooseOption/OptionRow.jsx:73
+msgid "Option {0}"
 msgstr "본드 {0}"
 
 #: src/components/TopBar/OhmMenu.jsx:104
@@ -127,7 +127,7 @@ msgstr "로컬 변경"
 msgid "Check back soon!"
 msgstr "잠시 후 다시 확인해보세요!"
 
-#: src/views/Bond/AdvancedSettings.jsx:63
+#: src/views/Option/AdvancedSettings.jsx:63
 msgid "Choose recipient address. By default, this is your currently connected address"
 msgstr "수신자 주소를 지정하세요. 기본 값으로 설정하면 현재 연결되어 있는 당신의 주소가 사용됩니다."
 
@@ -135,32 +135,32 @@ msgstr "수신자 주소를 지정하세요. 기본 값으로 설정하면 현�
 #~ msgid "Circulating Supply (total)"
 #~ msgstr "유통량(총)"
 
-#: src/views/Bond/BondRedeem.jsx:71
-#: src/views/ChooseBond/ClaimRow.jsx:133
+#: src/views/Option/OptionRedeem.jsx:71
+#: src/views/ChooseOption/ClaimRow.jsx:133
 msgid "Claim"
 msgstr "청구"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:118
+#: src/views/ChooseOption/ClaimOptions.jsx:118
 msgid "Claim all"
 msgstr "전부 청구"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:135
+#: src/views/ChooseOption/ClaimOptions.jsx:135
 msgid "Claim all and Stake"
 msgstr "전부 청구하고 스테이크"
 
-#: src/views/Bond/BondRedeem.jsx:87
+#: src/views/Option/OptionRedeem.jsx:87
 msgid "Claim and Autostake"
 msgstr "청구하고 자동스테이크"
 
-#: src/views/ChooseBond/ClaimRow.jsx:141
+#: src/views/ChooseOption/ClaimRow.jsx:141
 msgid "Claim and Stake"
 msgstr "청구하고 스테이크"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:78
+#: src/views/ChooseOption/ClaimOptions.jsx:78
 msgid "Claimable"
 msgstr "청구 가능한"
 
-#: src/views/Bond/BondRedeem.jsx:104
+#: src/views/Option/OptionRedeem.jsx:104
 msgid "Claimable Rewards"
 msgstr "청구 가능한 보상"
 
@@ -190,8 +190,8 @@ msgstr "현재 상금"
 msgid "Dashboard"
 msgstr "대시보드"
 
-#: src/views/Bond/BondPurchase.jsx:259
-#: src/views/Bond/BondRedeem.jsx:128
+#: src/views/Option/OptionPurchase.jsx:259
+#: src/views/Option/OptionRedeem.jsx:128
 msgid "Debt Ratio"
 msgstr "부채 비율"
 
@@ -248,8 +248,8 @@ msgstr "파밍 풀"
 #~ msgid "Feedback"
 #~ msgstr "피드백"
 
-#: src/views/Bond/BondPurchase.jsx:146
-msgid "First time bonding"
+#: src/views/Option/OptionPurchase.jsx:146
+msgid "First time optioning"
 msgstr "첫 본딩"
 
 #: src/views/Stake/Stake.jsx:291
@@ -264,7 +264,7 @@ msgstr "첫 언스테이킹"
 msgid "Forum"
 msgstr "포럼"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:84
+#: src/views/ChooseOption/ClaimOptions.jsx:84
 msgid "Fully Vested"
 msgstr "베스팅 완료"
 
@@ -285,7 +285,7 @@ msgstr "1분 미만"
 msgid "Market Cap"
 msgstr "마켓캡(시가총액)"
 
-#: src/views/Bond/Bond.jsx:74
+#: src/views/Option/Option.jsx:74
 msgid "Market Price"
 msgstr "시장 가격"
 
@@ -295,11 +295,11 @@ msgstr "시장 가격"
 
 #: src/views/33Together/PoolDeposit.jsx:146
 #: src/views/33Together/PoolWithdraw.jsx:139
-#: src/views/Bond/BondPurchase.jsx:167
+#: src/views/Option/OptionPurchase.jsx:167
 msgid "Max"
 msgstr "최대"
 
-#: src/views/Bond/BondPurchase.jsx:241
+#: src/views/Option/OptionPurchase.jsx:241
 msgid "Max You Can Buy"
 msgstr "구입 가능한 최대"
 
@@ -319,15 +319,15 @@ msgstr "다음 보상 이자"
 msgid "Next award"
 msgstr "다음 어워드"
 
-#: src/views/Bond/BondPurchase.jsx:178
-#~ msgid "Note: The \"Approve\" transaction is only needed when bonding for the first time; subsequent bonding only requires you to perform the \"Bond\" transaction."
+#: src/views/Option/OptionPurchase.jsx:178
+#~ msgid "Note: The \"Approve\" transaction is only needed when optioning for the first time; subsequent optioning only requires you to perform the \"Option\" transaction."
 #~ msgstr "알림: \"기능 승인\" 트랜젝션은 최초 본딩시에만 필요로 합니다; 이후 본딩은 \"본드\" 트랜젝션만 수행하면 됩니다."
 
 #: src/views/Stake/Stake.jsx:265
 #~ msgid "Note: The \"Approve\" transaction is only needed when staking/unstaking for the first time; subsequent staking/unstaking only requires you to perform the \"Stake\" or \"Unstake\" transaction."
 #~ msgstr "알림: \"기능 승인\" 트랜젝션은 최초 스테이킹/언스테이킹시에만 필요로 합니다; 이후 스테이킹/언스테이킹시에는 \"스테이크\" 또는 \"언스테이크\" 트랜젝션만 수행하면 됩니다."
 
-#: src/views/ChooseBond/ChooseBond.jsx:101
+#: src/views/ChooseOption/ChooseOption.jsx:101
 msgid "OHM Price"
 msgstr "OHM 가격"
 
@@ -339,11 +339,11 @@ msgstr "OHM 가격"
 msgid "Page not found"
 msgstr "페이지를 찾을 수 없습니다"
 
-#: src/views/ChooseBond/ClaimBonds.jsx:81
+#: src/views/ChooseOption/ClaimOptions.jsx:81
 msgid "Pending"
 msgstr "계류중"
 
-#: src/views/Bond/BondRedeem.jsx:96
+#: src/views/Option/OptionRedeem.jsx:96
 msgid "Pending Rewards"
 msgstr "계류중인 보상"
 
@@ -352,19 +352,19 @@ msgstr "계류중인 보상"
 msgid "Pending..."
 msgstr "계류중..."
 
-#: src/views/Bond/BondPurchase.jsx:147
+#: src/views/Option/OptionPurchase.jsx:147
 #: src/views/Stake/Stake.jsx:293
 #: src/views/Stake/Stake.jsx:300
 msgid "Please approve Olympus Dao to use your"
 msgstr "OlympusDAO를 승인해 주세요"
 
-#: src/views/Bond/BondPurchase.jsx:52
+#: src/views/Option/OptionPurchase.jsx:52
 msgid "Please enter a valid value!"
 msgstr "유효한 값을 입력하세요"
 
 #: src/views/33Together/PoolDeposit.jsx:66
 #: src/views/33Together/PoolWithdraw.jsx:59
-#: src/views/Bond/BondPurchase.jsx:50
+#: src/views/Option/OptionPurchase.jsx:50
 #: src/views/Stake/Stake.jsx:113
 #: src/views/Stake/Stake.jsx:113
 msgid "Please enter a value!"
@@ -378,8 +378,8 @@ msgstr "풀 어워드 잔고는 현재 0 입니다."
 msgid "Pool owner"
 msgstr "풀 소유"
 
-#: src/views/ChooseBond/BondRow.jsx:38
-#: src/views/ChooseBond/ChooseBond.jsx:120
+#: src/views/ChooseOption/OptionRow.jsx:38
+#: src/views/ChooseOption/ChooseOption.jsx:120
 #: src/views/Dashboard/Dashboard.jsx:31
 msgid "Price"
 msgstr "가격"
@@ -396,15 +396,15 @@ msgstr "상금이 지급중 입니다."
 #~ msgid "Protocol Owned Liquidity OHM-DAI"
 #~ msgstr "프로토콜 소유 유동성 OHM-DAI"
 
-#: src/views/ChooseBond/BondRow.jsx:55
-#: src/views/ChooseBond/ChooseBond.jsx:126
+#: src/views/ChooseOption/OptionRow.jsx:55
+#: src/views/ChooseOption/ChooseOption.jsx:126
 msgid "Purchased"
 msgstr "구입량"
 
-#: src/views/Bond/BondPurchase.jsx:250
-#: src/views/Bond/BondRedeem.jsx:119
-#: src/views/ChooseBond/BondRow.jsx:46
-#: src/views/ChooseBond/ChooseBond.jsx:123
+#: src/views/Option/OptionPurchase.jsx:250
+#: src/views/Option/OptionRedeem.jsx:119
+#: src/views/ChooseOption/OptionRow.jsx:46
+#: src/views/ChooseOption/ChooseOption.jsx:123
 msgid "ROI"
 msgstr "ROI(수익률)"
 
@@ -416,15 +416,15 @@ msgstr "ROI (5일 기준 수익)"
 msgid "Read more about Fairness"
 msgstr "공정성에 대해 더 읽어보세요"
 
-#: src/views/Bond/BondPurchase.jsx:276
+#: src/views/Option/OptionPurchase.jsx:276
 msgid "Recipient"
 msgstr "수취인"
 
-#: src/views/Bond/AdvancedSettings.jsx:57
+#: src/views/Option/AdvancedSettings.jsx:57
 msgid "Recipient Address"
 msgstr "수취인 주소"
 
-#: src/views/Bond/Bond.jsx:98
+#: src/views/Option/Option.jsx:98
 msgid "Redeem"
 msgstr "상환"
 
@@ -440,13 +440,13 @@ msgstr "상환"
 msgid "Single Staking"
 msgstr "단일 스테이킹"
 
-#: src/views/Bond/AdvancedSettings.jsx:37
+#: src/views/Option/AdvancedSettings.jsx:37
 msgid "Slippage"
 msgstr "슬리피지"
 
-#: src/views/Bond/BondPurchase.jsx:182
-#: src/views/ChooseBond/BondRow.jsx:73
-#: src/views/ChooseBond/BondRow.jsx:128
+#: src/views/Option/OptionPurchase.jsx:182
+#: src/views/ChooseOption/OptionRow.jsx:73
+#: src/views/ChooseOption/OptionRow.jsx:128
 msgid "Sold Out"
 msgstr "매진"
 
@@ -500,7 +500,7 @@ msgstr "이 상금 풀은 현재 예치할 수 없습니다."
 msgid "This Prize Pool is unable to accept withdrawals at this time."
 msgstr "이 상금 풀은 현재 출금할 수 없습니다."
 
-#: src/views/Bond/BondRedeem.jsx:112
+#: src/views/Option/OptionRedeem.jsx:112
 msgid "Time until fully vested"
 msgstr "완전한 베스팅 까지 걸리는 시간"
 
@@ -516,11 +516,11 @@ msgstr "총 스폰서십"
 msgid "Total Value Deposited"
 msgstr "예치된 총 가치"
 
-#: src/views/Bond/AdvancedSettings.jsx:51
+#: src/views/Option/AdvancedSettings.jsx:51
 msgid "Transaction may revert if price changes by more than slippage %"
 msgstr "만약 가격이 슬리피지% 보다 높게 변할 경우 트랜젝션이 환원될 수 있습니다."
 
-#: src/views/ChooseBond/ChooseBond.jsx:79
+#: src/views/ChooseOption/ChooseOption.jsx:79
 msgid "Treasury Balance"
 msgstr "금고 잔고"
 
@@ -552,13 +552,13 @@ msgstr "sOHM 언스테이킹"
 msgid "Unwrapping sOHM"
 msgstr "sOHM 래핑하기"
 
-#: src/views/Bond/BondPurchase.jsx:268
-#: src/views/Bond/BondRedeem.jsx:137
+#: src/views/Option/OptionPurchase.jsx:268
+#: src/views/Option/OptionRedeem.jsx:137
 msgid "Vesting Term"
 msgstr "베스팅 기간"
 
-#: src/views/ChooseBond/BondRow.jsx:28
-#: src/views/ChooseBond/BondRow.jsx:97
+#: src/views/ChooseOption/OptionRow.jsx:28
+#: src/views/ChooseOption/OptionRow.jsx:97
 msgid "View Contract"
 msgstr "컨트랙트 보기"
 
@@ -598,7 +598,7 @@ msgstr "OHM 래핑하기"
 msgid "Yield Source"
 msgstr "이자 출처"
 
-#: src/views/Bond/BondPurchase.jsx:232
+#: src/views/Option/OptionPurchase.jsx:232
 msgid "You Will Get"
 msgstr "당신이 얻게 될 양"
 
@@ -620,11 +620,11 @@ msgstr "sOHM 잔고 보다 더 많은 양을 언스테이크 할 수 없습니�
 msgid "You cannot withdraw more than your pool balance"
 msgstr "풀 잔고 보다 더 많은 양을 출금할 수 없습니다."
 
-#: src/views/Bond/BondPurchase.jsx:55
-msgid "You have an existing bond. Bonding will reset your vesting period and forfeit rewards. We recommend claiming rewards first or using a fresh wallet. Do you still want to proceed?"
+#: src/views/Option/OptionPurchase.jsx:55
+msgid "You have an existing option. optioning will reset your vesting period and forfeit rewards. We recommend claiming rewards first or using a fresh wallet. Do you still want to proceed?"
 msgstr "현재 본드를 갖고 있습니다. 새로 본딩하면 베스팅 기간과 보상이 몰수됩니다. 보상을 청구하거나 새 지갑을 사용하길 권장합니다. 그래도 진행하시겠습니까?"
 
-#: src/views/Bond/BondPurchase.jsx:217
+#: src/views/Option/OptionPurchase.jsx:217
 msgid "Your Balance"
 msgstr "당신의 잔고"
 
@@ -660,10 +660,10 @@ msgstr "당신의 지갑 잔고"
 msgid "day"
 msgstr "일"
 
-#. The action of bonding (verb)
-#: src/views/Bond/Bond.jsx:92
-#: src/views/ChooseBond/BondRow.jsx:128
-msgid "do_bond"
+#. The action of optioning (verb)
+#: src/views/Option/Option.jsx:92
+#: src/views/ChooseOption/OptionRow.jsx:128
+msgid "do_option"
 msgstr "본딩 하세요"
 
 #. The action of staking (verb)
@@ -671,8 +671,8 @@ msgstr "본딩 하세요"
 msgid "do_stake"
 msgstr "스테이크 하세요"
 
-#: src/views/Bond/BondPurchase.jsx:148
-msgid "for bonding"
+#: src/views/Option/OptionPurchase.jsx:148
+msgid "for optioning"
 msgstr "본딩을 위해"
 
 #: src/views/Stake/Stake.jsx:294

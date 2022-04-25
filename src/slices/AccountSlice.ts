@@ -1,13 +1,9 @@
-import {
-  createAsyncThunk,
-  createSelector,
-  createSlice,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit";
 import { setAll } from "../helpers";
 import { RootState } from "src/store";
 const initialState = {
   loading: false,
-  bonds: {},
+  options: {},
   balances: { busd: "", ohm: "", sohm: "" },
   staking: { ohmStake: 0, ohmUnstake: 0 },
 };
@@ -20,8 +16,15 @@ const accountSlice = createSlice({
       setAll(state, action.payload);
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: builder => {},
 });
+
+export interface IUserOptionDetails {
+  allowance: number;
+  interestDue: number;
+  optionMaturationBlock: number;
+  pendingPayout: string; //Payout formatted in gwei.
+}
 
 export default accountSlice.reducer;
 
@@ -29,4 +32,4 @@ export const { fetchAccountSuccess } = accountSlice.actions;
 
 const baseInfo = (state: RootState) => state.account;
 
-export const getAccountState = createSelector(baseInfo, (account) => account);
+export const getAccountState = createSelector(baseInfo, account => account);

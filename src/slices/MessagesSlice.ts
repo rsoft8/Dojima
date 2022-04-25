@@ -15,12 +15,7 @@ interface MessagesState {
   items: Array<Message>;
 }
 // Adds a message to the store
-const createMessage = function (
-  state: MessagesState,
-  severity: string,
-  title: string,
-  text: string
-) {
+const createMessage = function (state: MessagesState, severity: string, title: string, text: string) {
   let message: Message = {
     id: nb_messages++,
     severity,
@@ -49,15 +44,13 @@ const messagesSlice = createSlice({
     },
     // Closes a message
     close(state, action: PayloadAction<Message>) {
-      state.items = state.items.map((message) => {
-        return message.id == action.payload.id
-          ? Object.assign({}, message, { open: false })
-          : message;
+      state.items = state.items.map(message => {
+        return message.id == action.payload.id ? Object.assign({}, message, { open: false }) : message;
       });
     },
     // Finds and removes obsolete messages
     handle_obsolete(state) {
-      let activeMessages = state.items.filter((message) => {
+      let activeMessages = state.items.filter(message => {
         return Date.now() - message.created < MESSAGES_MAX_DISPLAY_DURATION;
       });
       if (state.items.length != activeMessages.length) {

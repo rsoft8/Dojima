@@ -9,7 +9,8 @@ export class EnvHelper {
    * @returns `process.env`
    */
   static env = process.env;
-  static alchemyTestnetURI = `https://data-seed-prebsc-1-s1.binance.org:8545/`;
+  // static alchemyTestnetURI = `https://data-seed-prebsc-1-s1.binance.org:8545/`;
+  static alchemyTestnetURI = `https://rpc.testnet.fantom.network/`;
   static whitespaceRegex = /\s+/;
 
   /**

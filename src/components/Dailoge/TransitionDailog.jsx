@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -11,26 +11,55 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, Typography } from "@material-ui/core";
 import { Trans } from "@lingui/react";
-import { Skeleton, Stack } from "@mui/material";
+import { Skeleton, Stack, TextField } from "@mui/material";
 import "./dailog.scss";
-import WalletIcon from "./walletIcon.png";
-function TransitionDailog({ isOpen, handleClose, type, handlePurchase }) {
+import { useDispatch, useSelector } from "react-redux";
+import { useWeb3Context } from "src/hooks/web3Context";
+import { buyOption, changeApproval, loadOptionDetails } from "src/slices/OptionSlice";
+import { isPendingTxn, txnButtonText } from "src/slices/PendingTxnsSlice";
+function TransitionDailog({ isOpen, handleClose, type }) {
+  const { connect, address, hasCachedProvider, provider, chainID, connected, uri } = useWeb3Context();
   const primaryColor = "#2042B3";
-  const [numPlayers, setNumPlayers] = React.useState(0);
+  const greyColor = "#cfcccc";
+  const dispatch = useDispatch();
+  const pendingTransactions = useSelector(state => {
+    return state.pendingTransactions;
+  });
+  const option = useSelector(({ optioning: { allOptions, selectedOption } }) => allOptions[selectedOption]);
+  console.log("🚀 ~ file: TransitionDailog.jsx ~ line 29 ~ TransitionDailog ~ option", option);
+  const [optionValue, setOptionValue] = useState(0);
+
+  const ROI = (option?.underlyingAmt * option?.priceUnderlying) / (option?.swapAssetAmt * option?.priceSwapAsset) - 1;
+
+  const hasAllowance = useCallback(
+    token => {
+      if (type == "Purchase") {
+        return option?.purchaseAllowance <= 0;
+      } else if (type == "Exercise") {
+        return option?.exerciseAllowance <= 0;
+      }
+      return false;
+    },
+    [option],
+  );
+
+  const onSeekApproval = async () => {
+    dispatch(changeApproval({ address, type, option, provider, networkID: chainID }));
+  };
+
+  const onBuyOption = async () => {
+    console.log("🚀 ~ file: TransitionDailog.jsx ~ line 52 ~ onBuyOption ~ type, optionValue", type, optionValue);
+    dispatch(buyOption({ type, optionValue, option, provider, networkID: chainID }));
+  };
+
   return (
-    <Dialog
-      open={isOpen}
-      keepMounted={true}
-      onClose={handleClose}
-      aria-describedby="alert-dialog-slide-description"
-    >
+    <Dialog open={isOpen} keepMounted={true} onClose={handleClose} aria-describedby="alert-dialog-slide-description">
       <DialogTitle sx={{ display: "flex" }}>
         <IconButton
           aria-label="close"
           onClick={handleClose}
-          className="close"
           sx={{
-            color: (theme) => theme.palette.grey[500],
+            color: theme => theme.palette.grey[500],
           }}
         >
           <CloseIcon />
@@ -50,83 +79,84 @@ function TransitionDailog({ isOpen, handleClose, type, handlePurchase }) {
       <DialogContent className="dailog-content">
         <Box className="dailog-item">
           <Stack className="item" direction="row">
-            <img src={WalletIcon} alt="" />
+            <img src={option?.option.OptionDailogIcon} alt="" className="logo-img" />
             <Typography className="icon-text">rDAP</Typography>
           </Stack>
-          <Stack className="item">
+          <Stack className="item min-w">
             <Typography className="p">Total Available</Typography>
-            <Typography className="amount-value">274.52 KPR</Typography>
+            <Typography className="amount-value">
+              {type == "Purchase" ? option?.optionAvailableBalance : option?.optionUserBalance}{" "}
+              {option?.optionERC20Symbol}
+            </Typography>
           </Stack>
           <Stack className="item">
-            <Typography className="p">Total Available</Typography>
-            <Typography className="amount-value">274.52 KPR</Typography>
+            <Typography className="p">Market Price</Typography>
+            <Typography className="amount-value">$ {option?.marketPrice}</Typography>
           </Stack>
         </Box>
-        <div className="data-row">
+        <div className="top-row">
           <Typography className="name">Number of Options</Typography>
-          <Typography className="value">
-            {false ? <Skeleton width="80px" /> : <>{numPlayers}</>}
-          </Typography>
+
+          <TextField
+            type="number"
+            inputProps={{ style: { textAlign: "center", padding: 2, margin: 0 } }}
+            value={optionValue}
+            onChange={e => setOptionValue(e.target.value)}
+            variant="outlined"
+          />
         </div>
-        <Slider
-          defaultValue={0.1}
-          aria-label="Default"
-          step={0.01}
-          valueLabelDisplay="auto"
-          min={0}
-          max={374.52}
-          value={numPlayers}
-          onChange={(e) => setNumPlayers(e.target.value)}
-          sx={{
-            width: "95%",
-            marginLeft: 0.6,
-            color: primaryColor,
-            "& .MuiSlider-rail": {
-              height: "10px",
-            },
-            ".MuiSlider-track": {
-              height: "10px",
-            },
-          }}
-        />
+        <div className="slider-div">
+          <Slider
+            defaultValue={0.1}
+            aria-label="Default"
+            step={0.01}
+            valueLabelDisplay="auto"
+            min={0}
+            max={type == "Purchase" ? option?.optionAvailableBalance : option?.optionUserBalance}
+            value={optionValue}
+            onChange={e => setOptionValue(parseInt(e.target.value))}
+            sx={{
+              width: "85%",
+              marginLeft: 0.6,
+              color: primaryColor,
+              "& .MuiSlider-rail": {
+                height: "10px",
+              },
+              ".MuiSlider-track": {
+                height: "10px",
+              },
+            }}
+          />
+        </div>
         {type == "Purchase" ? (
           <>
-            {" "}
             <div className="data-row">
               <Typography className="name">Underlying Amount</Typography>
               <Typography className="value">
-                {false ? <Skeleton width="80px" /> : <>{"343 KPR"}</>}
+                {option?.underlyingAmt} {option?.underlyingSymbol}
               </Typography>
             </div>
             <div className="data-row">
               <Typography className="name">Amount due on execution</Typography>
               <Typography className="value">
-                {false ? <Skeleton width="80px" /> : <>{"20 USDC"}</>}
+                {optionValue * (option?.swapAssetAmt / option?.underlyingAmt)} {option?.swapSymbol}
               </Typography>
             </div>
             <div className="data-row">
               <Typography className="name">Strike Price</Typography>
-              <Typography className="value">
-                {false ? <Skeleton width="80px" /> : <>{"$11"}</>}
-              </Typography>
+              <Typography className="value">$ {option?.swapAssetAmt / option?.underlyingAmt}</Typography>
             </div>
             <div className="data-row">
               <Typography className="name">Market Price</Typography>
-              <Typography className="value">
-                {false ? <Skeleton width="80px" /> : <>{"$3439"}</>}
-              </Typography>
+              <Typography className="value">$ {option?.marketPrice}</Typography>
             </div>
             <div className="data-row">
               <Typography className="name">ROI</Typography>
-              <Typography className="value">
-                {false ? <Skeleton width="80px" /> : <>{"3%"}</>}
-              </Typography>
+              <Typography className="value">{ROI} %</Typography>
             </div>
             <div className="data-row">
               <Typography className="name">Time to expiry</Typography>
-              <Typography className="value">
-                {false ? <Skeleton width="80px" /> : <>{"3 days"}</>}
-              </Typography>
+              <Typography className="value">{option?.expiryTime}</Typography>
             </div>
           </>
         ) : (
@@ -134,59 +164,65 @@ function TransitionDailog({ isOpen, handleClose, type, handlePurchase }) {
             <div className="data-row">
               <Typography className="name">You Will Get</Typography>
               <Typography className="value">
-                {false ? <Skeleton width="80px" /> : <>{"343 KPR"}</>}
+                {optionValue * (option?.swapAssetAmt / option?.underlyingAmt)}
+                {option?.underlyingSymbol}
               </Typography>
             </div>
             <div className="data-row">
               <Typography className="name">You Will Give</Typography>
               <Typography className="value">
-                {false ? <Skeleton width="80px" /> : <>{"20 USDC"}</>}
+                {optionValue * (option?.swapAssetAmt / option?.underlyingAmt)} {option?.swapSymbol}
               </Typography>
             </div>
             <div className="data-row">
               <Typography className="name">ROI</Typography>
-              <Typography className="value">
-                {false ? <Skeleton width="80px" /> : <>{"3%"}</>}
-              </Typography>
+              <Typography className="value">{ROI} %</Typography>
             </div>
             <div className="data-row">
               <Typography className="name">Time to expire</Typography>
-              <Typography className="value">
-                {false ? <Skeleton width="80px" /> : <>{"3 Days"}</>}
-              </Typography>
+              <Typography className="value">{option?.expiryTime}</Typography>
             </div>
           </>
         )}
       </DialogContent>
       <DialogActions sx={{ padding: 3, paddingBottom: 3 }}>
-        <Button
-          variant="contained"
-          style={{
-            background: primaryColor,
-            color: "#fff",
-            textTransform: "none",
-            borderRadius: 8,
-            minWidth: 150,
-          }}
-          onClick={handleClose}
-        >
-          Approve
-        </Button>
-        <Button
-          variant="contained"
-          style={{
-            background: "#E5E5E5",
-            color: "#707070",
-            borderColor: "#707070",
-            textTransform: "none",
-            borderRadius: 8,
-            boxShadow: "none",
-            minWidth: 170,
-          }}
-          onClick={handlePurchase}
-        >
-          {type} Options
-        </Button>
+        {hasAllowance(type) ? (
+          <Button
+            fullWidth
+            variant="contained"
+            style={{
+              background: isPendingTxn(pendingTransactions, "approve_" + option?.option?.name)
+                ? greyColor
+                : primaryColor,
+              color: "#fff",
+              textTransform: "none",
+              borderRadius: 8,
+            }}
+            onClick={onSeekApproval}
+          >
+            {txnButtonText(
+              pendingTransactions,
+              "approve_" + option?.option?.name,
+              hasAllowance(type) ? `Approve` : `Approved`,
+            )}
+          </Button>
+        ) : (
+          <Button
+            fullWidth
+            variant="contained"
+            style={{
+              background: isPendingTxn(pendingTransactions, "approve_" + option?.option?.name)
+                ? greyColor
+                : primaryColor,
+              color: "#fff",
+              textTransform: "none",
+              borderRadius: 8,
+            }}
+            onClick={onBuyOption}
+          >
+            {txnButtonText(pendingTransactions, "approve_" + option?.option?.name, `${type} Options`)}
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   );
