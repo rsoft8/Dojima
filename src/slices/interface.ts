@@ -34,9 +34,10 @@ export interface IJsonRPCError {
 }
 export interface IApproveOptionAsyncThunk extends IBaseOptionAsyncThunk {
   readonly address: string;
-  readonly token: string;
+  readonly type: string;
 }
 export interface IABuyOptionAsyncThunk extends IBaseOptionAsyncThunk {
   readonly type: string;
+  readonly address: string;
   readonly optionValue: string;
 }

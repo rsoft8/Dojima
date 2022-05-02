@@ -18,18 +18,16 @@ import { useWeb3Context } from "src/hooks/web3Context";
 import useOptions from "src/hooks/Options";
 import { setSelected } from "src/slices/OptionSlice";
 function Home() {
-  const { chainID, connect, connected } = useWeb3Context();
-  console.log("🚀 ~ file: index.jsx ~ line 22 ~ Home ~ connected", connected);
-
   const primaryColor = "#2042B3";
+  const { chainID, connect, connected } = useWeb3Context();
   const dispatch = useDispatch();
   const { options } = useOptions(chainID);
   const [exerciseDialoge, setExerciseDialoge] = useState(false);
+  const [purchaseOption, setPurchaseOption] = useState(false);
   const allOptions = useSelector(({ optioning: { allOptions } }) =>
     Object.keys(allOptions).map(key => allOptions[key]),
   );
-  const [purchaseOption, setPurchaseOption] = useState(false);
-  console.log("🚀 ~ file: index.jsx ~ line 29 ~ Home ~ allOptions", allOptions);
+
   const tableHeader = {
     fontSize: 12,
     paddingY: 1,

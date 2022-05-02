@@ -47,12 +47,12 @@ export const fto1 = new StableOption({
   optionContainerABI: optionContainerABI,
   networkAddrs: {
     [NetworkID.Mainnet]: {
-      optionContact: "0x8a8749c2FD74EB3ee4bF0B5fda6Edc862ce8653F",
-      optionContainer: "0x8b14890ad25be9ac2bf9ef47130a0adb890bcebf",
+      optionContact: "0x94c69f765624DD3FB79B3fd1D9d984E2F1143359",
+      optionContainer: "0xcaA758d5459c721AEb60e2c2168aeb6F4560FcC7",
     },
     [NetworkID.Testnet]: {
-      optionContact: "0x8a8749c2FD74EB3ee4bF0B5fda6Edc862ce8653F", //OptionERC20
-      optionContainer: "0x8b14890ad25be9ac2bf9ef47130a0adb890bcebf", //OptionContainer
+      optionContact: "0x94c69f765624DD3FB79B3fd1D9d984E2F1143359", //OptionERC20
+      optionContainer: "0xcaA758d5459c721AEb60e2c2168aeb6F4560FcC7", //OptionContainer
     },
   },
 });
@@ -82,7 +82,7 @@ export const fto2 = new StableOption({
 });
 
 //! The below is the only option for the production and the above options are for testing in mainnet
-export const allOptions = [fto, fto1, fto2];
+export const allOptions = [fto1];
 
 // // TODO (appleseed-expiredOptions): there may be a smarter way to refactor this
 export const allExpiredOptions = [];

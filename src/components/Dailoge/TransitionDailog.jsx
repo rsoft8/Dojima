@@ -17,26 +17,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { useWeb3Context } from "src/hooks/web3Context";
 import { buyOption, changeApproval, loadOptionDetails } from "src/slices/OptionSlice";
 import { isPendingTxn, txnButtonText } from "src/slices/PendingTxnsSlice";
+
 function TransitionDailog({ isOpen, handleClose, type }) {
   const { connect, address, hasCachedProvider, provider, chainID, connected, uri } = useWeb3Context();
   const primaryColor = "#2042B3";
   const greyColor = "#cfcccc";
+  const [optionValue, setOptionValue] = useState(100);
   const dispatch = useDispatch();
+  const option = useSelector(({ optioning: { allOptions, selectedOption } }) => allOptions[selectedOption]);
   const pendingTransactions = useSelector(state => {
     return state.pendingTransactions;
   });
-  const option = useSelector(({ optioning: { allOptions, selectedOption } }) => allOptions[selectedOption]);
-  console.log("🚀 ~ file: TransitionDailog.jsx ~ line 29 ~ TransitionDailog ~ option", option);
-  const [optionValue, setOptionValue] = useState(0);
 
   const ROI = (option?.underlyingAmt * option?.priceUnderlying) / (option?.swapAssetAmt * option?.priceSwapAsset) - 1;
 
   const hasAllowance = useCallback(
     token => {
+      console.log(
+        "🚀 ~ file: TransitionDailog.jsx ~ line 38 ~ TransitionDailog ~ option?.purchaseAllowance",
+        option?.purchaseAllowance,
+        option?.exerciseAllowance,
+        type,
+      );
       if (type == "Purchase") {
-        return option?.purchaseAllowance <= 0;
+        return option?.purchaseAllowance > 0;
       } else if (type == "Exercise") {
-        return option?.exerciseAllowance <= 0;
+        return option?.exerciseAllowance > 0;
       }
       return false;
     },
@@ -44,12 +50,12 @@ function TransitionDailog({ isOpen, handleClose, type }) {
   );
 
   const onSeekApproval = async () => {
+    console.log("🚀 ~ file: TransitionDailog.jsx ~ line 54 ~ onSeekApproval ~ type", type);
     dispatch(changeApproval({ address, type, option, provider, networkID: chainID }));
   };
 
   const onBuyOption = async () => {
-    console.log("🚀 ~ file: TransitionDailog.jsx ~ line 52 ~ onBuyOption ~ type, optionValue", type, optionValue);
-    dispatch(buyOption({ type, optionValue, option, provider, networkID: chainID }));
+    dispatch(buyOption({ address, type, optionValue, option, provider, networkID: chainID }));
   };
 
   return (
@@ -198,13 +204,9 @@ function TransitionDailog({ isOpen, handleClose, type }) {
               textTransform: "none",
               borderRadius: 8,
             }}
-            onClick={onSeekApproval}
+            onClick={onBuyOption}
           >
-            {txnButtonText(
-              pendingTransactions,
-              "approve_" + option?.option?.name,
-              hasAllowance(type) ? `Approve` : `Approved`,
-            )}
+            {txnButtonText(pendingTransactions, "approve_" + option?.option?.name, `${type} Options`)}
           </Button>
         ) : (
           <Button
@@ -218,9 +220,13 @@ function TransitionDailog({ isOpen, handleClose, type }) {
               textTransform: "none",
               borderRadius: 8,
             }}
-            onClick={onBuyOption}
+            onClick={onSeekApproval}
           >
-            {txnButtonText(pendingTransactions, "approve_" + option?.option?.name, `${type} Options`)}
+            {txnButtonText(
+              pendingTransactions,
+              "approve_" + option?.option?.name,
+              hasAllowance(type) ? `Approved` : `Approve`,
+            )}
           </Button>
         )}
       </DialogActions>
