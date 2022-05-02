@@ -1,3 +1,4 @@
+import { NetworkAddresses } from "./../lib/Option";
 import { Option } from "src/lib/Option";
 import { BigNumber, ethers } from "ethers";
 import axios from "axios";
@@ -46,25 +47,31 @@ export const calcOptionDetails = createAsyncThunk(
     { option, provider, networkID, address }: ICalcOptionDetailsAsyncThunk,
     { dispatch, getState },
   ): Promise<IOptionDetails> => {
+    console.log("🚀 ~ file: OptionSlice.ts ~ line 50 ~ option", option);
     try {
       const optionID = option.optionId;
       const salesAddress = addresses[networkID].SALES_CONTRACT;
       const optionContainer = option.getContainerContract(networkID, provider);
       const optionERC20Contract = option.getERC20Contract(networkID, provider);
+      console.log("🚀 ~ file: OptionSlice.ts ~ line 54 ~ optionERC20Contract", optionERC20Contract);
       const salesContract = option.getSalesContract(salesAddress, provider);
 
       const call = await axios.get(MARKET_PRICE_API);
       const deadline = await optionContainer.deadline();
       const swapAsset = await optionContainer.swapAsset();
       const underlyingAsset = await optionContainer.underlyingAsset();
+      console.log("🚀 ~ file: OptionSlice.ts ~ line 60 ~ underlyingAsset", underlyingAsset);
       const currentBlock = await provider.getBlockNumber();
       const optionERC20Symbol = await optionERC20Contract.symbol();
 
       const underlyingContract = option.getUnderlyingContract(underlyingAsset, provider);
+      console.log("🚀 ~ file: OptionSlice.ts ~ line 64 ~ underlyingContract", underlyingContract);
       const swapContract = option.getSwapContract(swapAsset, provider);
 
       const underlyingSymbol = await underlyingContract.symbol();
       const swapSymbol = await swapContract.symbol();
+      // const minPurchase = await swapContract.symbol();
+      // const maxPurchase = await swapContract.symbol();
 
       const swapAssetAmt = Number(ethers.utils.formatUnits(await optionContainer.swapAssetAmt(), "ether"));
       const underlyingAmt = Number(ethers.utils.formatUnits(await optionContainer.underlyingAmt(), "ether"));
@@ -88,17 +95,34 @@ export const calcOptionDetails = createAsyncThunk(
       let swapBalance = 0;
       let optionUserBalance = 0;
 
+      const buyTokenAddress = await salesContract.sales(optionID);
+      const buyTokenContract = option.getSwapContract(buyTokenAddress.buyToken, provider);
+
       if (address) {
-        purchaseAllowance = Number((await optionERC20Contract.allowance(address, salesAddress)).toString());
-        console.log("🚀 ~ file: OptionSlice.ts ~ line 102 ~ 11 purchaseAllowance", purchaseAllowance);
-        exerciseAllowance = Number((await underlyingContract.allowance(address, salesAddress)).toString());
-        underlyingBalance = Number((await underlyingContract.balanceOf(address)).toString());
-        swapBalance = Number((await swapContract.balanceOf(address)).toString());
-        optionUserBalance = Number((await optionERC20Contract.balanceOf(address)).toString());
-        console.log("🚀 ~ file: OptionSlice.ts ~ line 85 ~ underlyingBalance", exerciseAllowance);
+        try {
+          exerciseAllowance = Number(
+            (await buyTokenContract.allowance(address, option.networkAddrs[networkID].optionContact)).toString(),
+          );
+
+          purchaseAllowance = Number((await swapContract.allowance(address, salesAddress)).toString());
+          console.log("🚀 ~ file: OptionSlice.ts ~ line 102 ~ 11 purchaseAllowance", exerciseAllowance);
+
+          underlyingBalance = Number(
+            ethers.utils.formatUnits(BigNumber.from(await underlyingContract.balanceOf(address)), "ether"),
+          );
+          swapBalance = Number(
+            ethers.utils.formatUnits(BigNumber.from(await swapContract.balanceOf(address)), "ether"),
+          );
+          optionUserBalance = Number(
+            ethers.utils.formatUnits(BigNumber.from(await optionERC20Contract.balanceOf(address)), "ether"),
+          );
+          console.log("🚀 ~ file: OptionSlice.ts ~ line 112 ~ optionUserBalance", optionAvailableBalance);
+        } catch (e) {
+          console.log("🚀 ~ file: OptionSlice.ts ~ line 85 ~ e", e);
+        }
       }
 
-      console.log("🚀 ~ file: OptionSlice.ts ~ line 102 ~ purchaseAllowance", purchaseAllowance);
+      console.log("🚀 ~ file: OptionSlice.ts ~ line 102 ~ optionAvailableBalance", optionAvailableBalance);
       return {
         optionID,
         option,
@@ -161,8 +185,7 @@ const initialState: IOptionSlice = {
 
 export const changeApproval = createAsyncThunk(
   "option/changeApproval",
-  async ({ address, token, option, provider, networkID }: IApproveOptionAsyncThunk, { dispatch }) => {
-    console.log("🚀 ~ file: OptionSlice.ts ~ line 172 ~ provider", token);
+  async ({ address, type, option, provider, networkID }: IApproveOptionAsyncThunk, { dispatch }) => {
     const subOption = option?.option;
     if (!provider) {
       dispatch(error("Please connect your wallet!"));
@@ -170,33 +193,48 @@ export const changeApproval = createAsyncThunk(
     }
 
     let tokenContract;
-    if (token == "Purchase") {
-      tokenContract = subOption.getERC20Contract(networkID, provider);
-    } else {
-      try {
-        console.log("🚀 ~ file: OptionSlice.ts ~ line 141 ~ optionContainer");
-        const optionContainer = subOption.getContainerContract(networkID, provider);
-        const underlyingAsset = await optionContainer.underlyingAsset();
-        tokenContract = subOption.getUnderlyingContract(underlyingAsset, provider);
-      } catch (e) {
-        console.log("🚀 ~ file: OptionSlice.ts ~ line 145 ~ e", e);
-      }
-    }
-    console.log("🚀 ~ file: OptionSlice.ts ~ line 142 ~ tokenContract", tokenContract);
-
-    const salesAddress = addresses[networkID].SALES_CONTRACT;
-
+    console.log("🚀 ~ file: OptionSlice.ts ~ line 186 ~ token", type);
     let approveTx;
-    let purchaseAllowance = await tokenContract.allowance(address, salesAddress);
-    console.log("🚀 ~ file: OptionSlice.ts ~ line 199 ~ purchaseAllowance", purchaseAllowance);
-    if (purchaseAllowance.gt(BigNumber.from("0"))) {
-      console.log("🚀 ~ file: OptionSlice.ts ~ line 200 ~ purchaseAllowance", purchaseAllowance);
-      dispatch(info("Approval completed."));
-      return;
-    }
-
     try {
-      approveTx = await tokenContract.approve(salesAddress, ethers.utils.parseUnits("1000000000", "wei").toString());
+      const salesAddress = addresses[networkID].SALES_CONTRACT;
+      if (type == "Purchase") {
+        try {
+          const salesContract = subOption.getSalesContract(salesAddress, provider);
+          const buyTokenAddress = await salesContract.sales(subOption.optionId);
+          tokenContract = subOption.getSwapContract(buyTokenAddress.buyToken, provider.getSigner());
+          console.log("🚀 ~ file: OptionSlice.ts ~ line 204 ~ tokenContract", tokenContract);
+          console.log("🚀 ~ file: OptionSlice.ts ~ line 204 ~ buyTokenAddress.buyToken", buyTokenAddress.buyToken);
+
+          // const optionContainer = subOption.getContainerContract(networkID, provider);
+          // const swapAsset = await optionContainer.swapAsset();
+          // tokenContract = subOption.getUnderlyingContract(swapAsset, provider.getSigner());
+          approveTx = await tokenContract.approve(
+            salesAddress,
+            ethers.utils.parseUnits("100000000000", "ether").toString(),
+          );
+        } catch (e) {
+          console.log("🚀 ~ file: OptionSlice.ts ~ line 145 ~ e", e);
+        }
+      } else {
+        const optionContainer = subOption.getContainerContract(networkID, provider);
+        const swapAsset = await optionContainer.swapAsset();
+        tokenContract = subOption.getSwapContract(swapAsset, provider.getSigner());
+        approveTx = await tokenContract.approve(
+          subOption.networkAddrs[networkID].optionContact,
+          ethers.utils.parseUnits("100000000000", "ether").toString(),
+        );
+        // tokenContract = subOption.getERC20Contract(networkID, provider.getSigner());
+      }
+      console.log("🚀 ~ file: OptionSlice.ts ~ line 142 ~ tokenContract", tokenContract);
+
+      // let purchaseAllowance = await tokenContract.allowance(address, salesAddress);
+      // console.log("🚀 ~ file: OptionSlice.ts ~ line 199 ~ purchaseAllowance", purchaseAllowance);
+      // if (purchaseAllowance.gt(BigNumber.from("0"))) {
+      //   console.log("🚀 ~ file: OptionSlice.ts ~ line 200 ~ purchaseAllowance", purchaseAllowance);
+      //   dispatch(info("Approval completed."));
+      //   return;
+      // }
+
       dispatch(
         fetchPendingTxns({
           txnHash: approveTx.hash,
@@ -206,6 +244,7 @@ export const changeApproval = createAsyncThunk(
       );
       await approveTx.wait();
     } catch (e: unknown) {
+      console.log("🚀 ~ file: OptionSlice.ts ~ line 224 ~ e", e);
       dispatch(error((e as IJsonRPCError).message));
     } finally {
       if (approveTx) {
@@ -225,8 +264,9 @@ export const changeApproval = createAsyncThunk(
 
 export const buyOption = createAsyncThunk(
   "option/buyOption",
-  async ({ type, optionValue, option, provider, networkID }: IABuyOptionAsyncThunk, { dispatch }) => {
-    const value = BigInt(+optionValue * 10 ** 18);
+  async ({ address, type, optionValue, option, provider, networkID }: IABuyOptionAsyncThunk, { dispatch }) => {
+    // const value = BigInt(+optionValue * 10 ** 18);
+    // console.log("🚀 ~ file: OptionSlice.ts ~ line 246 ~ value", value);
     const signer = provider.getSigner();
     const subOption = option?.option;
     let buyOptionTxt;
@@ -236,18 +276,38 @@ export const buyOption = createAsyncThunk(
       return;
     }
 
+    console.log(
+      "🚀 ~ file: OptionSlice.ts ~ line 268 ~ ",
+      type,
+      ethers.utils.parseUnits(optionValue.toString(), "ether").toString(),
+    );
     try {
       if (type == "Purchase") {
         const salesContract = await subOption?.getSalesContract(addresses[networkID].SALES_CONTRACT, signer);
-        buyOptionTxt = await salesContract.purchaseTokens(subOption.optionId, value);
+        buyOptionTxt = await salesContract.purchaseTokens(
+          subOption.optionId.toString(),
+          ethers.utils.parseUnits(optionValue.toString(), "ether").toString(),
+        );
+        console.log("🚀 ~ file: OptionSlice.ts ~ line 265 ~ buyOptionTxt", buyOptionTxt);
       } else {
         const erc20Contract = await subOption?.getERC20Contract(networkID, signer);
-        buyOptionTxt = await erc20Contract.excerciseOptions(value);
+        buyOptionTxt = await erc20Contract.excerciseOptions(
+          ethers.utils.parseUnits(optionValue.toString(), "ether").toString(),
+        );
       }
     } catch (e: any) {
+      console.log("🚀 ~ file: OptionSlice.ts ~ line 270 ~ e", e);
       dispatch(error(e?.data.message));
     } finally {
       if (buyOptionTxt) {
+        dispatch(
+          calcOptionDetails({
+            option: subOption,
+            provider,
+            networkID,
+            address,
+          }),
+        );
         dispatch(clearPendingTxn(buyOptionTxt.hash));
       }
     }
